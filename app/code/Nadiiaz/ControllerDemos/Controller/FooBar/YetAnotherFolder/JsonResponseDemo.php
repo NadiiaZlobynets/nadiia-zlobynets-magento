@@ -27,7 +27,7 @@ class JsonResponseDemo implements
 
     /**
      * Controller demo
-     * https://nadiia-zlobynets-magento.local/nadiiaz-controller-demos/foobar_yetanotherfolder/jsonresponsedemo/parameter-name-1/10
+     * /nadiiaz-controller-demos/foobar_yetanotherfolder/jsonresponsedemo/parameter-name-1/10
      *
      * @return Json
      */
@@ -35,8 +35,8 @@ class JsonResponseDemo implements
     {
         return $this->jsonFactory->create()
             ->setData([
-                'parameter-name-1' => $this->request->getParam('parameter-name-1', $_GET['vendor']),
-                'parameter-name-2' => $this->request->getParam('parameter-name-2', $_GET['module']),
+                'vendor' => $this->request->getParam('vendor'),
+                'module' => $this->request->getParam('module'),
             ]);
     }
 }

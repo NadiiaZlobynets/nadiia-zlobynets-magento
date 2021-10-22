@@ -22,7 +22,6 @@ class RedirectResponseDemo implements
         $this->redirectFactory = $redirectFactory;
     }
 
-
     /**
      * Controller demo
      *

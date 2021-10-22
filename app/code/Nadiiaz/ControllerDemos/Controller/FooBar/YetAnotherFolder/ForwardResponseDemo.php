@@ -10,17 +10,21 @@ class ForwardResponseDemo implements
     \Magento\Framework\App\Action\HttpGetActionInterface
 {
 
+    private \Magento\Framework\App\RequestInterface $request;
+
     private \Magento\Framework\Controller\Result\ForwardFactory $forwardFactory;
 
     /**
+     * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Framework\Controller\Result\ForwardFactory $forwardFactory
      */
     public function __construct(
+        \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Controller\Result\ForwardFactory $forwardFactory
     ) {
+        $this->request = $request;
         $this->forwardFactory = $forwardFactory;
     }
-
 
     /**
      * Controller demo
@@ -31,11 +35,9 @@ class ForwardResponseDemo implements
     {
         return $this->forwardFactory->create()
             ->setParams([
-                'parameter-name-1' => $_GET['vendor'],
-                'parameter-name-2' => $_GET['module']
-                ])
+                'vendor' => 'Nadiiaz',
+                'module' => 'Nadiiaz_ControllerDemos'
+            ])
             ->forward('jsonresponsedemo');
     }
 }
-
-

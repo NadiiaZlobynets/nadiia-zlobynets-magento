@@ -36,31 +36,27 @@ class RawResponseDemo implements
 
     public function execute(): Raw
     {
-        return $this->rawFactory->create()
-            ->setContents(
-                  <<< 'HTML'
-                <html>
-                    <body style="background-color: bisque; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">
-                         <div style="padding-top: 3rem">
-                            <ul>
-                                <li><a href="https://nadiia-zlobynets-magento.local/nadiiaz-controller-demos/foobar_yetanotherfolder/rawresponsedemo">RawResponseDemo</a></li>
-                                <li><a href="https://nadiia-zlobynets-magento.local/nadiiaz-controller-demos/foobar_yetanotherfolder/redirectresponsedemo">RedirectResponseDemo</a></li>
-                                <li><a href="https://nadiia-zlobynets-magento.local/nadiiaz-controller-demos/foobar_yetanotherfolder/forwardresponsedemo">ForwardResponseDemo</a></li>
-                            </ul>
-                            </div>
-                       <div style="padding-left: 1.5rem">
-                            <form method="get" action="https://nadiia-zlobynets-magento.local/nadiiaz-controller-demos/foobar_yetanotherfolder/jsonresponsedemo" id="parameters">
-                                <input type="text" value="Nadiiaz" name="vendor">
-                                <input type="text" value="Nadiiaz_ControllerDemos" name="module">
-                                <button type="submit" form="parameters" >submit</button>
-                            </form>
-                        </div>
-                    </body>
-                </html>
-                HTML
-    );
-
-
-
+        return $this->rawFactory->create()->setContents(
+        <<<'HTML'
+        <html>
+            <body style="background-color: bisque; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">
+                 <div style="padding-top: 3rem">
+                    <ul>
+                        <li><a href="/nadiiaz-controller-demos/foobar_yetanotherfolder/rawresponsedemo">RawResponseDemo</a></li>
+                        <li><a href="/nadiiaz-controller-demos/foobar_yetanotherfolder/redirectresponsedemo" target="_blank">RedirectResponseDemo</a></li>
+                        <li><a href="/nadiiaz-controller-demos/foobar_yetanotherfolder/forwardresponsedemo">ForwardResponseDemo</a></li>
+                    </ul>
+                    </div>
+                    <div style="padding-left: 1.5rem">
+                        <form method="get" action="/nadiiaz-controller-demos/foobar_yetanotherfolder/jsonresponsedemo" id="parameters">
+                            <input type="text" value="Nadiiaz" name="vendor">
+                            <input type="text" value="Nadiiaz_ControllerDemos" name="module">
+                            <button type="submit" form="parameters" >submit</button>
+                        </form>
+                    </div>
+            </body>
+        </html>
+        HTML
+        );
     }
 }
