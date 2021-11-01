@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Nadiiaz\LayoutDebug\Controller\Index;
 
-use Magento\Framework\View\Result\Layout;
+use \Magento\Framework\View\Result\Layout;
 
 class LayoutResponse implements \Magento\Framework\App\Action\HttpGetActionInterface
 {

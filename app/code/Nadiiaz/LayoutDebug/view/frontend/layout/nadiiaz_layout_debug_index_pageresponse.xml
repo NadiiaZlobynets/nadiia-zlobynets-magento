@@ -5,15 +5,11 @@
 >
     <body>
         <referenceContainer name="content">
-            <container name="nadiiaz.layout.debug.footer" htmlTag="div" htmlClass="dv-campus-layout-debug">
-                <block name="nadiiaz.layout.debug.footer.text"
-                       class="Magento\Framework\View\Element\Text"
-                       before="-"
-                >
-                    <arguments>
-                        <argument name="text" translate="true" xsi:type="string"><![CDATA[{Nadiiaz} Text block demo]]></argument>
-                    </arguments>
-                </block>
+            <container name="nadiiaz.layout.debug.container" htmlTag="div" htmlClass="dv-campus-layout-debug">
+                <block class="Magento\Framework\View\Element\Template"
+                       name="nadiiaz.layout.debug.text.block.with.template"
+                       template="Nadiiaz_LayoutDebug::demo.phtml"
+                />
             </container>
         </referenceContainer>
     </body>

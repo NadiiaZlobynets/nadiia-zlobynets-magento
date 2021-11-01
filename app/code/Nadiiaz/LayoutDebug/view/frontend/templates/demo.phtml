@@ -1,0 +1,25 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block; */
+?>
+<html>
+    <body style="background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">
+        <div style="padding-top: 3rem">
+            <ul>
+                <li><a href="<?= $block->getUrl('nadiiaz_layout_debug/index/pageresponse') ?>">PageResponseDemo</a></li>
+                <li><a href="<?= $block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/redirectresponsedemo') ?>" target="_blank">RedirectResponseDemo</a></li>
+                <li><a href="<?= $block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/forwardresponsedemo') ?>">ForwardResponseDemo</a></li>
+            </ul>
+        </div>
+        <div style="padding-left: 1.5rem">
+            <form method="get" action="<?= $block->getUrl('nadiiaz_layout_debug/index/layoutresponse') ?>" id="parameters">
+                <label>
+                    <input type="text" value="Nadiiaz" name="vendor" style="background-color: transparent; border: none; border-bottom: 2px solid silver; color: darkslategrey; width: auto">
+                </label>
+                <label>
+                    <input type="text" value="Nadiiaz_ControllerDemos" name="module" style="background-color: transparent; border: none; border-bottom: 2px solid silver; color: darkslategrey; width: auto">
+                </label>
+                <button type="submit" form="parameters" >submit</button>
+            </form>
+        </div>
+    </body>
+</html>
