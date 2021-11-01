@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd"
+>
+    <router id="standard">
+        <route id="nadiiaz_layout_debug" frontName="nadiiaz_layout_debug">
+            <module name="Nadiiaz_LayoutDebug"/>
+        </route>
+    </router>
+</config>
+
+<!--
+@TODO: https://nadiia-zlobynets-magento.local/nadiiaz-controller-demos/foobar_yetanotherfolder/rawresponsedemo
+        https://nadiia-zlobynets-magento.us/nadiiaz-controller-demos/foobar_yetanotherfolder/rawresponsedemo
+        /nadiiaz-controller-demos/foobar_yetanotherfolder/rawresponsedemo
+-->
