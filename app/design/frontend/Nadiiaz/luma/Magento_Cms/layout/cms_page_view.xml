@@ -10,10 +10,5 @@
         <referenceContainer name="page.top" remove="true">
             <block class="Magento\Theme\Block\Html\Breadcrumbs" name="breadcrumbs" as="breadcrumbs" />
         </referenceContainer>
-        <container>
-            <block class="Magento\Framework\View\Element\Template" name="nadiiaz.layout.debug.color.container"
-                   template="Nadiiaz_LayoutDebug::color.phtml"
-            />
-        </container>
     </body>
 </page>

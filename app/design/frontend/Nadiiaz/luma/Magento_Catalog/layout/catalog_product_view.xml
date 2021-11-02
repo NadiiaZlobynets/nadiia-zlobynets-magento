@@ -5,12 +5,6 @@
     <body>
 <!--        <move element="product.info.addto" destination="product.info.details" before="reviews.tab"/>-->
         <move element="product.info.addto" destination="product.info.main" before="-"/>
-            <container name="nadiiaz.layout.debug.container" htmlTag="div" htmlClass="nadiiaz-layout-debug">
-                <block class="Magento\Framework\View\Element\Template"
-                       name="nadiiaz.layout.debug.text.block.with.template"
-                       template="Nadiiaz_LayoutDebug::color.phtml"
-                />
-            </container>
         <referenceBlock name="product.info.addto">
             <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="view.addto.wishlist"
                    template="Magento_Wishlist::catalog/product/view/addto/wishlist.phtml"/>
