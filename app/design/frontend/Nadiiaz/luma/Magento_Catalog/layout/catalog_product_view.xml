@@ -3,8 +3,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
 >
     <body>
-<!--        <move element="product.info.addto" destination="product.info.details" before="reviews.tab"/>-->
-        <move element="product.info.addto" destination="product.info.main" before="-"/>
+        <move element="product.info.social" destination="page.main.title" after="-"/>
         <referenceBlock name="product.info.addto">
             <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="view.addto.wishlist"
                    template="Magento_Wishlist::catalog/product/view/addto/wishlist.phtml"/>
