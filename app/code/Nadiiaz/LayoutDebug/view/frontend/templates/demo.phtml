@@ -1,0 +1,25 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block; */
+?>
+<html>
+    <body style="background: font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">
+        <div style="padding-top: 3rem">
+            <ul>
+                <li><a href="<?= $block->getUrl('nadiiaz_layout_debug/index/pageresponse') ?>">PageResponseDemo</a></li>
+                <li><a href="<?= $block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/redirectresponsedemo') ?>" target="_blank">RedirectResponseDemo</a></li>
+                <li><a href="<?= $block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/forwardresponsedemo') ?>">ForwardResponseDemo</a></li>
+            </ul>
+        </div>
+        <div style="padding-left: 1.5rem">
+            <form method="get" action="<?= $block->getUrl('nadiiaz_layout_debug/index/layoutresponse') ?>" id="parameters">
+                <label>
+                    <input type="text" value="Nadiiaz" name="vendor" style="width: auto">
+                </label>
+                <label>
+                    <input type="text" value="Nadiiaz_ControllerDemos" name="module" style="width: auto">
+                </label>
+                <button type="submit" form="parameters" >submit</button>
+            </form>
+        </div>
+    </body>
+</html>

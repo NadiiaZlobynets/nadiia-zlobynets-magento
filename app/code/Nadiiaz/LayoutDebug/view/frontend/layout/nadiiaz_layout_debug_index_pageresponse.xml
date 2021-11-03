@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="1column"
+>
+    <body>
+        <referenceContainer name="content">
+            <container name="nadiiaz.layout.debug.container" htmlTag="div" htmlClass="dv-campus-layout-debug">
+                <block class="Magento\Framework\View\Element\Template"
+                       name="nadiiaz.layout.debug.text.block.with.template"
+                       template="Nadiiaz_LayoutDebug::demo.phtml"
+                />
+            </container>
+        </referenceContainer>
+    </body>
+</page>
