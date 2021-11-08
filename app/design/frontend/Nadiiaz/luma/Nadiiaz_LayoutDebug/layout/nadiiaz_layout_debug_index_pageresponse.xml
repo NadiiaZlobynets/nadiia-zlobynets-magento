@@ -5,11 +5,20 @@
 >
     <body>
         <referenceContainer name="content">
-            <container name="nadiiaz.layout.debug.container" htmlTag="div" htmlClass="dv-campus-layout-debug">
+            <container name="nadiiaz.layout.debug.container" htmlTag="div" htmlClass="nadiiaz-layout-debug">
                 <block class="Magento\Framework\View\Element\Template"
                        name="nadiiaz.layout.debug.text.block.with.template"
                        template="Nadiiaz_LayoutDebug::demo.phtml"
                 />
+                <block class="Magento\Framework\View\Element\Template"
+                       name="nadiiaz.layout.debug.parent.block"
+                       template="Nadiiaz_LayoutDebug::parent_block.phtml"
+                >
+                    <block class="Magento\Framework\View\Element\Template"
+                           name="nadiiaz.layout.debug.child.block"
+                           template="Nadiiaz_LayoutDebug::parent_block/child_block.phtml"
+                    />
+                </block>
             </container>
         </referenceContainer>
     </body>
