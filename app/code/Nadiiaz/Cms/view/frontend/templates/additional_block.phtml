@@ -1,0 +1,10 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<div style="padding-left: 2rem">
+<h3><?= $escaper->escapeHtml(__('Attention: %1', $block->getData('demo_store'))) ?></h3>
+</div>
