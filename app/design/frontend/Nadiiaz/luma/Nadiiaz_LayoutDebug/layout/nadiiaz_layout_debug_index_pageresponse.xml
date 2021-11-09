@@ -20,15 +20,15 @@
                     >
                         <arguments>
                             <argument name="boolean_parameter" xsi:type="boolean">true</argument>
-                            <argument name="string_parameter" xsi:type="string">Demo string for .local website</argument>
+                            <argument name="string_parameter" translate="true" xsi:type="string">Demo string for .local website</argument>
                             <argument name="int_parameter" xsi:type="number">888</argument>
                             <argument name="float_parameter" xsi:type="number">888.88</argument>
                             <argument name="array_parameter" xsi:type="array">
-                                <item name="array_element_1" xsi:type="null"/>
-                                <item name="array_element_2" xsi:type="null"/>
-                                <item name="array_element_3" xsi:type="string">Array Element 1</item>
-                                <item name="array_element_4" xsi:type="string">Array Element 2</item>
+                                <item name="array_element_3" translate="true" xsi:type="string">Array Element 1</item>
+                                <item name="array_element_4" translate="true" xsi:type="string">Array Element 2</item>
                             </argument>
+                            <argument name="url_parameter" xsi:type="url" path="nadiiaz_layout_debug/index/layoutresponse"/>
+                            <argument name="service_url_parameter" xsi:type="serviceUrl" path="nadiiaz_layout_debug/index/layoutresponse"/>
                             <argument name="options_parameter" xsi:type="options" model="Nadiiaz\LayoutDebug\Model\Options"/>
                         </arguments>
                 </block>

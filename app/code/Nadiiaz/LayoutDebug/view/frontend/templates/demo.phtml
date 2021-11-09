@@ -1,17 +1,21 @@
 <?php
-/** @var \Magento\Framework\View\Element\Template $block; */
+/** @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
 ?>
 <html>
     <body style="background: font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">
         <div style="padding-top: 3rem">
             <ul>
-                <li><a href="<?= $block->getUrl('nadiiaz_layout_debug/index/pageresponse') ?>">PageResponseDemo</a></li>
-                <li><a href="<?= $block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/redirectresponsedemo') ?>" target="_blank">RedirectResponseDemo</a></li>
-                <li><a href="<?= $block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/forwardresponsedemo') ?>">ForwardResponseDemo</a></li>
+                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz_layout_debug/index/pageresponse')) ?>"> <?= $escaper->escapeHtml(__('Page Response')) ?></a></li>
+                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz_layout_debug/index/layoutresponse')) ?>"> <?= $escaper->escapeHtml(__('Layout Response')) ?></a></li>
+                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/redirectresponsedemo')) ?>" target=<?= $escaper->escapeHtmlAttr('_blank' ) ?>> <?= $escaper->escapeHtml(__('Redirect Response Demo')) ?></a></li>
+                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/forwardresponsedemo')) ?>"> <?= $escaper->escapeHtml(__('Forward Response Demo')) ?></a></li>
             </ul>
         </div>
         <div style="padding-left: 1.5rem">
-            <form method="get" action="<?= $block->getUrl('nadiiaz_layout_debug/index/layoutresponse') ?>" id="parameters">
+            <form method="get" action="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz_layout_debug/index/layoutresponse')) ?>" id="parameters">
                 <label>
                     <input type="text" value="Nadiiaz" name="vendor" style="width: auto">
                 </label>
