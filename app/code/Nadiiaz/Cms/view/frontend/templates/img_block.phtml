@@ -1,0 +1,11 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<div>
+<p><?= $escaper->escapeHtml(__('Text: %1', $block->getData('text'))) ?></p>
+    <img src="<?= $escaper->escapeHtmlAttr('../pub/media/images/banner.png') ?>" alt="<?= $escaper->escapeHtmlAttr('some_img') ?>">
+</div>
