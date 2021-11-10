@@ -10,9 +10,9 @@
 <h4><?= $escaper->escapeHtml(__('Simple type parameters')) ?></h4>
 <ul>
     <li><?= $escaper->escapeHtml(
-            __('Boolean parameter: %1', var_export($block->getData('boolean_parameter'), true))
-        )
-        ?></li>
+        __('Boolean parameter: %1', var_export($block->getData('boolean_parameter'), true))
+    )
+    ?></li>
     <li><?= $escaper->escapeHtml(__('String parameter: %1', $block->getData('string_parameter'))) ?></li>
     <li><?= $escaper->escapeHtml(__('Int parameter: %1', (int) $block->getData('int_parameter'))) ?></li>
     <li><?= $escaper->escapeHtml(__('Float parameter: %1', (float) $block->getData('float_parameter'))) ?></li>
