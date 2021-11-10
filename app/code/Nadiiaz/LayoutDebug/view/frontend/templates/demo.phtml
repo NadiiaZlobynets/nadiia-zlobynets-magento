@@ -5,13 +5,17 @@
  */
 ?>
 <html>
-    <body style="background: font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">
+    <body>
         <div style="padding-top: 3rem">
             <ul>
-                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz_layout_debug/index/pageresponse')) ?>"> <?= $escaper->escapeHtml(__('Page Response')) ?></a></li>
-                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz_layout_debug/index/layoutresponse')) ?>"> <?= $escaper->escapeHtml(__('Layout Response')) ?></a></li>
-                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/redirectresponsedemo')) ?>" target=<?= $escaper->escapeHtmlAttr('_blank' ) ?>> <?= $escaper->escapeHtml(__('Redirect Response Demo')) ?></a></li>
-                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/forwardresponsedemo')) ?>"> <?= $escaper->escapeHtml(__('Forward Response Demo')) ?></a></li>
+                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz_layout_debug/index/pageresponse')) ?>">
+                             <?= $escaper->escapeHtml(__('Page Response')) ?></a></li>
+                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz_layout_debug/index/layoutresponse')) ?>">
+                             <?= $escaper->escapeHtml(__('Layout Response')) ?></a></li>
+                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/redirectresponsedemo')) ?>"
+                      target=<?= $escaper->escapeHtmlAttr('_blank' ) ?>><?= $escaper->escapeHtml(__('Redirect Response Demo')) ?></a></li>
+                <li><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('nadiiaz-controller-demos/foobar_yetanotherfolder/forwardresponsedemo')) ?>">
+                             <?= $escaper->escapeHtml(__('Forward Response Demo')) ?></a></li>
             </ul>
         </div>
         <div style="padding-left: 1.5rem">
