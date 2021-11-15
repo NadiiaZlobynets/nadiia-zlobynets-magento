@@ -7,15 +7,12 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <move element="nadiiaz.cms.container" destination="page.top" after="-"/>
+        <move element="nadiiaz.cms.container" destination="page.wrapper" before="-"/>
         <referenceContainer name="content">
         <container name="nadiiaz.cms.container" htmlTag="div" htmlClass="nadiiaz-cms">
-            <block class="Magento\Framework\View\Element\Template"
-                   name="nadiiaz.cms.additional.block"
-                   template="Nadiiaz_Cms::additional_block.phtml"
-            >
+            <block class="Magento\Cms\Block\BlockByIdentifier" name="nadiiaz.cms.block">
                 <arguments>
-                    <argument name="demo_store" xsi:type="string" translate="true">This is a demo store by Nadiiaz for {DV.Campus}. Orders will not be accepted!</argument>
+                    <argument name="identifier" xsi:type="string">nadiiaz_cms_block</argument>
                 </arguments>
             </block>
         </container>
