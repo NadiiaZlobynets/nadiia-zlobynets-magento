@@ -6,5 +6,5 @@
  */
 ?>
 <div class="message-error error message">
-<p><?= $escaper->escapeHtml(__('Attention: %1', $block->getData('error_message'))) ?></p>
+<p><?= $escaper->escapeHtml(__($block->getData('error_message'))) ?></p>
 </div>
