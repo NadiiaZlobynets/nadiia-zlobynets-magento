@@ -9,13 +9,10 @@
     <body>
         <move element="nadiiaz.cms.img.container" destination="page.main.title" after="-"/>
         <referenceContainer name="content">
-            <container name="nadiiaz.cms.img.container" htmlTag="div" htmlClass="nadiiaz-cms">
-                <block class="Magento\Framework\View\Element\Template"
-                       name="nadiiaz.cms.img.container.block"
-                       template="Nadiiaz_Cms::img_block.phtml"
-                >
+            <container name="nadiiaz.cms.img.container" htmlTag="div" htmlClass="nadiiaz-cms-img">
+                <block class="Magento\Cms\Block\BlockByIdentifier" name="nadiiaz.cms.img.block">
                     <arguments>
-                        <argument name="text" xsi:type="string" translate="true">Lorem Ipsum</argument>
+                        <argument name="identifier" xsi:type="string">nadiiaz_cms_img_block</argument>
                     </arguments>
                 </block>
             </container>

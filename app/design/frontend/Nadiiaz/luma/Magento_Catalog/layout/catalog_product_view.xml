@@ -4,6 +4,6 @@
 >
     <body>
         <move element="product.info.social" destination="page.main.title" after="-"/>
-        <move element="nadiiaz.catalog.product.error.message.container" destination="product.info.main" before="-"/>
+        <move element="nadiiaz.catalog.product.error.message.block" destination="product.info.main" before="-"/>
     </body>
 </page>
