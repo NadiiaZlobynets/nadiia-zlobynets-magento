@@ -17,5 +17,12 @@
             </block>
         </container>
         </referenceContainer>
+        <referenceContainer name="nadiiaz.cms.img.container">
+            <block class="Magento\Cms\Block\BlockByIdentifier" name="nadiiaz.cms.img.block">
+                <arguments>
+                    <argument name="identifier" xsi:type="string">nadiiaz_cms_img_block</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>
