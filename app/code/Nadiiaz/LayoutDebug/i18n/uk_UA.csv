@@ -10,7 +10,6 @@
 "Null parameter: %1","Параметр NULL: %1"
 "URL parameter: ","URL: "
 "Service URL parameter (API, not controller!):","URL для API (не для контроллерів!):"
-"Helper call result: %1","Результат виклику хелпера: %1"
 "Array parameter","Передача масива через лейаут"
 "Key %1 has value %2","Ключ ""%1"" має значення ""%2"""
 "Options parameter","Передача опцій"
@@ -23,4 +22,3 @@
 "Array Element 2","Масив, елемент №1"
 "This is a demo store by Nadiiaz for {DV.Campus}. Orders will not be accepted!","Це демо-версія магазину від Nadiiaz для {DV.Campus}. Замовлення не приймаються!"
 "This is a demo product. You can add them to cart and place order only to test the Magento capabilities","Це демо-продукти. Ви можете додати їх до кошика та створити замовлення лише для тестування можливостей Magento"
-"Subscribe now to get a special promo!","Підписуйся зараз щоб отримати спеціальну пропозицію!"

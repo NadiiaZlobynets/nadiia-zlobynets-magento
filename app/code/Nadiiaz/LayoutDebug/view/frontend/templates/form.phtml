@@ -7,8 +7,8 @@
 <html>
     <body style="background: font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">
         <div style="padding-left: 1.5rem; padding-top: 3rem;">
-            <p><?= $escaper->escapeHtml(__('Vendor:')) ?> <?= $escaper->encodeUrlParam($block->getRequest()->getParam('vendor')) ?>
-            <p><?= $escaper->escapeHtml(__('Module:')) ?> <?= $escaper->encodeUrlParam($block->getRequest()->getParam('module')) ?>
+            <p><?= $escaper->escapeHtml(__('Vendor: %1', $block->getRequest()->getParam('vendor'))) ?></p>
+            <p><?= $escaper->escapeHtml(__('Module: %1', $block->getRequest()->getParam('module'))) ?></p>
         </div>
     </body>
 </html>
