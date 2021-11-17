@@ -5,11 +5,34 @@
 >
     <body>
         <referenceContainer name="content">
-            <container name="nadiiaz.layout.debug.container" htmlTag="div" htmlClass="dv-campus-layout-debug">
+            <container name="nadiiaz.layout.debug.container" htmlTag="div" htmlClass="nadiiaz-layout-debug">
                 <block class="Magento\Framework\View\Element\Template"
                        name="nadiiaz.layout.debug.text.block.with.template"
                        template="Nadiiaz_LayoutDebug::demo.phtml"
                 />
+                <block class="Magento\Framework\View\Element\Template"
+                       name="nadiiaz.layout.debug.parent.block"
+                       template="Nadiiaz_LayoutDebug::parent_block.phtml"
+                />
+                <block class="Magento\Framework\View\Element\Template"
+                       name="nadiiaz.layout.debug.child.block"
+                       template="Nadiiaz_LayoutDebug::parent_block/child_block.phtml"
+                >
+                <arguments>
+                    <argument name="boolean_parameter" xsi:type="boolean">false</argument>
+                    <argument name="string_parameter" translate="true" xsi:type="string">Demo string</argument>
+                    <argument name="int_parameter" xsi:type="number">777</argument>
+                    <argument name="float_parameter" xsi:type="number">777.77</argument>
+                    <argument name="null_parameter" xsi:type="null"/>
+                    <argument name="array_parameter" xsi:type="array">
+                        <item name="array_element_1"  translate="true" xsi:type="string">Array Element 1</item>
+                        <item name="array_element_2"  translate="true" xsi:type="string">Array Element 2</item>
+                    </argument>
+                    <argument name="url_parameter" xsi:type="url" path="nadiiaz_layout_debug/index/layoutresponse"/>
+                    <argument name="service_url_parameter" xsi:type="serviceUrl" path="nadiiaz_layout_debug/index/layoutresponse"/>
+                    <argument name="options_parameter" xsi:type="options" model="Nadiiaz\LayoutDebug\Model\Options"/>
+                </arguments>
+                </block>
             </container>
         </referenceContainer>
     </body>

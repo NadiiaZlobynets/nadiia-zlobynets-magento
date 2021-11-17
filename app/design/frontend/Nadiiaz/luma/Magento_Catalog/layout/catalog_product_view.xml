@@ -4,9 +4,6 @@
 >
     <body>
         <move element="product.info.social" destination="page.main.title" after="-"/>
-        <referenceBlock name="product.info.addto">
-            <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="view.addto.wishlist"
-                   template="Magento_Wishlist::catalog/product/view/addto/wishlist.phtml"/>
-        </referenceBlock>
+        <move element="nadiiaz.catalog.product.error.message.block" destination="product.info.main" before="-"/>
     </body>
 </page>

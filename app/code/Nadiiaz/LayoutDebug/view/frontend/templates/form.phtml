@@ -1,11 +1,14 @@
 <?php
-    /** @var Magento\Framework\View\Element\Template $block; */
+    /** @var Magento\Framework\View\Element\Template $block;
+     * @var \Magento\Framework\Escaper $escaper
+     * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+     */
 ?>
 <html>
     <body style="background: font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">
         <div style="padding-left: 1.5rem; padding-top: 3rem;">
-            <p>Vendor: <?=$block->getRequest()->getParam('vendor')?>
-            <p>Module: <?=$block->getRequest()->getParam('module')?>
+            <p><?= $escaper->escapeHtml(__('Vendor: %1', $block->getRequest()->getParam('vendor'))) ?></p>
+            <p><?= $escaper->escapeHtml(__('Module: %1', $block->getRequest()->getParam('module'))) ?></p>
         </div>
     </body>
 </html>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="nadiiaz.cms.img.container" destination="page.main.title" after="-"/>
+        <referenceContainer name="content">
+            <container name="nadiiaz.cms.img.container" htmlTag="div" htmlClass="nadiiaz-cms-img">
+                <block class="Magento\Cms\Block\BlockByIdentifier" name="nadiiaz.cms.img.block">
+                    <arguments>
+                        <argument name="identifier" xsi:type="string">nadiiaz_cms_img_block</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>
