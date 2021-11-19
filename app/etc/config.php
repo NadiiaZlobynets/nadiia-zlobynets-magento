@@ -359,6 +359,7 @@ return [
         'Nadiiaz_Cms' => 1,
         'Nadiiaz_ControllerDemos' => 1,
         'Nadiiaz_LayoutDebug' => 1,
+        'Nadiiaz_RegularCustomer' => 1,
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
         'Temando_ShippingRemover' => 1,
