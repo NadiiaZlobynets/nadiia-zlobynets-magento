@@ -12,7 +12,7 @@
                 <arguments>
                     <argument name="cache_lifetime" xsi:type="number">84600</argument>
                     <argument name="request_submit_url"
-                              path="nadiiaz_personal_discount/index/request"
+                              path="regular_customer/index/request"
                               xsi:type="url"
                     />
                     <argument name="product"
@@ -27,5 +27,11 @@
                 </arguments>
             </block>
         </referenceContainer>
+        <referenceBlock name="footer_links">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="nadiiaz.regular.customer.form.link"
+                   template="Nadiiaz_RegularCustomer::form_link.phtml" after="-">
+            </block>
+        </referenceBlock>
     </body>
 </page>

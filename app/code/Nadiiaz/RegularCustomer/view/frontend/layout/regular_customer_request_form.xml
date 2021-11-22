@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <referenceContainer name="nadiiaz.cms.img.container" htmlTag="div" htmlClass="nadiiaz-cms-img" remove="true"/>
+<referenceContainer name="content">
+        <block name="nadiiaz.personal.discount.form"
+               template="Nadiiaz_RegularCustomer::form.phtml"
+               before="-"
+        >
+        </block>
+    </referenceContainer>
+</layout>
