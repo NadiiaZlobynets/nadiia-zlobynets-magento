@@ -13,6 +13,6 @@ class DiscountRequest extends \Magento\Framework\View\Element\Template
      */
     public function getCacheKeyInfo(): array
     {
-        return array_merge(parent::getCacheKeyInfo(), ['product_id' => $this->getProduct()->getId()]);
+        return array_merge(parent::getCacheKeyInfo(), ['product_id' => ($this->getProduct()->getId())]);
     }
 }
