@@ -27,11 +27,5 @@
                 </arguments>
             </block>
         </referenceContainer>
-        <referenceBlock name="footer_links">
-            <block class="Magento\Framework\View\Element\Template"
-                   name="nadiiaz.regular.customer.form.link"
-                   template="Nadiiaz_RegularCustomer::form_link.phtml" after="-">
-            </block>
-        </referenceBlock>
     </body>
 </page>
