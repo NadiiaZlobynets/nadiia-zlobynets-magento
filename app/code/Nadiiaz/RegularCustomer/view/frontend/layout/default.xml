@@ -6,7 +6,7 @@
         <referenceBlock name="footer_links">
             <block class="Magento\Framework\View\Element\Html\Link\Current" name="2custom-link">
                 <arguments>
-                    <argument name="label" xsi:type="string">Loyalty Program</argument>
+                    <argument name="label" xsi:type="string" translate="true">Loyalty Program</argument>
                     <argument name="path" xsi:type="string">regular_customer/request/form</argument>
                 </arguments>
             </block>
