@@ -20,8 +20,8 @@
         <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="true"
                 comment="Store ID"
         />
-        <column xsi:type="smallint" name="admin_id" padding="5" unsigned="true" nullable="true"
-                comment="Admin ID"
+        <column xsi:type="int" name="admin_id" padding="5" unsigned="true" nullable="true"
+                comment="Admin User ID"
         />
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At"
@@ -72,8 +72,8 @@
                     referenceId="NADIIAZ_PERSONAL_DISCOUNT_REQUEST_ADMIN_ID_ID"
                     table="nadiiaz_personal_discount_request"
                     column="admin_id"
-                    referenceTable="store"
-                    referenceColumn="admin_id"
+                    referenceTable="admin_user"
+                    referenceColumn="user_id"
                     onDelete="SET NULL"
         />
     </table>
