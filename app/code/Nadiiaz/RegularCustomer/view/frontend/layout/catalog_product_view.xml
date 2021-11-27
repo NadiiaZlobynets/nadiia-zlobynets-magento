@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="Nadiiaz\RegularCustomer\Block\Product\View\DiscountRequest"
+                   name="nadiiaz.personal.discount.form"
+                   template="Nadiiaz_RegularCustomer::catalog/product/view/discount/personal_discount_request.phtml"
+                   before="product.info.details"
+            >
+                <arguments>
+                    <argument name="cache_lifetime" xsi:type="number">84600</argument>
+                    <argument name="request_submit_url"
+                              path="regular_customer/index/request"
+                              xsi:type="url"
+                    />
+                    <argument name="product"
+                              helper="Magento\Catalog\Helper\Data::getProduct"
+                              xsi:type="helper"
+                    />
+                </arguments>
+            </block>
+            <block class="Magento\Cms\Block\BlockByIdentifier" name="nadiiaz.cms.img.block" after="nadiiaz.catalog.product.error.message.block">
+                <arguments>
+                    <argument name="identifier" xsi:type="string">nadiiaz_regular_customer_cms_block</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

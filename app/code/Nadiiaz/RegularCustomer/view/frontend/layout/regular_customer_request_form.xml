@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <referenceContainer name="content">
+        <block class="Magento\Framework\View\Element\Template"
+               name="nadiiaz.personal.discount.page.form."
+               template="Nadiiaz_RegularCustomer::catalog/product/view/discount/personal_discount_request.phtml"
+               before="product.info.details"
+        >
+        </block>
+    </referenceContainer>
+</layout>
