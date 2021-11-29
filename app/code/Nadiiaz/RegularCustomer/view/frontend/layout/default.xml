@@ -4,10 +4,18 @@
 >
     <body>
         <referenceBlock name="footer_links">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="2custom-link">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="request-footer-link">
                 <arguments>
                     <argument name="label" xsi:type="string">Loyalty Program</argument>
                     <argument name="path" xsi:type="string">regular_customer/request/form</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="top.links">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="request-link" after="authorization-link">
+                <arguments>
+                    <argument name="path" xsi:type="string">regular_customer/requests/view</argument>
+                    <argument name="label" xsi:type="string" translate="true">My Requests</argument>
                 </arguments>
             </block>
         </referenceBlock>
