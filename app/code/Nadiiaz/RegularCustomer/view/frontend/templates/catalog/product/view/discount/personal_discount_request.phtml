@@ -43,6 +43,7 @@ $product = $block->getData('product')
                 </div>
             </div>
         </fieldset>
+        <?php if ($product): ?>
         <div class="actions-toolbar">
             <div class="primary">
                 <input type="hidden"
@@ -57,5 +58,6 @@ $product = $block->getData('product')
                 </button>
             </div>
         </div>
+        <?php endif; ?>
     </form>
 </div>
