@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
-<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
-    <referenceContainer name="nadiiaz.cms.img.container" htmlTag="div" htmlClass="nadiiaz-cms-img" remove="true"/>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
     <referenceContainer name="content">
         <block class="Nadiiaz\RegularCustomer\Block\Product\View\DiscountRequest"
                name="nadiiaz.personal.discount.form"
@@ -9,4 +11,5 @@
         >
         </block>
     </referenceContainer>
-</layout>
+    </body>
+</page>
