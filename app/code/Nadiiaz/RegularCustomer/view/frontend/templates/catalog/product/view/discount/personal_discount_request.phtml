@@ -18,6 +18,10 @@ $product = $block->getData('product')
                 <span><?= $escaper->escapeHtml(__('Loyalty program for Regular Customers')) ?></span>
             </legend>
             <br/>
+            <div>
+                <span><?= $escaper->escapeHtml(__('Customers who buy products multiple times get a discount when buying multiple items. Only registered customers will get discounts')) ?></span>
+            </div>
+            <br/>
             <div class="field name required">
                 <label class="label" for="name">
                     <span><?= $escaper->escapeHtml(__('Name')) ?></span>
@@ -43,7 +47,7 @@ $product = $block->getData('product')
                 </div>
             </div>
         </fieldset>
-        <?php if ($product) : ?>
+        <?php if ($product): ?>
         <div class="actions-toolbar">
             <div class="primary">
                 <input type="hidden"
