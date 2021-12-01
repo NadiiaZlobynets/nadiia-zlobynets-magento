@@ -7,7 +7,6 @@
         <title>Personal Discount</title>
     </head>
     <body>
-    <referenceContainer name="nadiiaz.cms.img.container" htmlTag="div" htmlClass="nadiiaz-cms-img" remove="true"/>
     <referenceContainer name="content">
         <block class="Magento\Framework\View\Element\Template"
                name="nadiiaz.personal.discount.request.list"
