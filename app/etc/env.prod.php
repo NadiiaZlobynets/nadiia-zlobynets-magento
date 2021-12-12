@@ -17,9 +17,9 @@ return [
         'connection' => [
             'default' => [
                 'host' => 'mysql',
-                'dbname' => 'nadiia_zlobynets_magento_local',
-                'username' => 'nadiia_zlobynets_magento_local',
-                'password' => 'nadiia_zlobynets_magento_local',
+                'dbname' => 'nadiiaz_magento_dev',
+                'username' => 'nadiiaz_magento_dev_user',
+                'password' => '@E+!aKzynT4xRX/=',
                 'model' => 'mysql4',
                 'engine' => 'innodb',
                 'initStatements' => 'SET NAMES utf8;',
