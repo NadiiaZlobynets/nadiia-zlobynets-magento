@@ -17,8 +17,8 @@ return [
         'connection' => [
             'default' => [
                 'host' => 'localhost',
-                'dbname' => 'nadiiaz_magento_dev',
-                'username' => 'nadiiaz_magento_dev_user',
+                'dbname' => 'nadiiaz_dev',
+                'username' => 'nadiiaz_dev_user',
                 'password' => '@E+!aKzynT4xRX/=',
                 'model' => 'mysql4',
                 'engine' => 'innodb',
