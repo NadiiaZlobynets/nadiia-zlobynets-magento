@@ -39,8 +39,8 @@ deployment:
           executor: php
     deploy:
       commands:
-        - command: 'git pull {branch}'
-          executor: shell
+#        - command: 'git pull {branch}'
+#          executor: shell
         - command: >
             sed -i "s/'MAGE_MODE' => 'production',/'MAGE_MODE' => 'default',/g" app/etc/env.php
           executor: shell
@@ -72,5 +72,5 @@ deployment:
         #          executor: php
         #        - command: 'bin/magento indexer:set-mode realtime customer_grid'
         #          executor: php
-        - command: 'bin/magento maintenance:disable'
-          executor: php
+#        - command: 'bin/magento maintenance:disable'
+#          executor: php
