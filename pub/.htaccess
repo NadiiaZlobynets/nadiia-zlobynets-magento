@@ -122,6 +122,13 @@
     Options +FollowSymLinks
     RewriteEngine on
 
+    # Development
+    SetEnvIf Host .*nadiiaz-magento.local.allbugs.info* MAGE_RUN_CODE=default
+    SetEnvIf Host .*nadiiaz-magento.local.allbugs.info* MAGE_RUN_TYPE=store
+    SetEnvIf Host .*nadiiaz-magento.us.allbugs.info* MAGE_RUN_CODE=us_store_view
+    SetEnvIf Host .*nadiiaz-magento.us.allbugs.info* MAGE_RUN_TYPE=store
+
+    # Production
     SetEnvIf Host .*nadiia-zlobynets-magento.local.* MAGE_RUN_CODE=default
     SetEnvIf Host .*nadiia-zlobynets-magento.local.* MAGE_RUN_TYPE=store
     SetEnvIf Host .*nadiia-zlobynets-magento.us.* MAGE_RUN_CODE=us_store_view
