@@ -1,37 +1,35 @@
-& when (@media-common = true) {
-    @message-success__color: @color-white;
-    @message-success__background: @color-blue3;
-    @message-success-icon__color-inner: @color-white;
+@message-success__color: @color-white;
+@message-success__background: @color-blue3;
+@message-success-icon__color-inner: @color-white;
 
-    @message-info__color: @color-blue3;
-    @message-info__background: @color-sky-blue1;
-    @message-info-icon__color-inner: @color-blue3;
+@message-info__color: @color-blue3;
+@message-info__background: @color-sky-blue1;
+@message-info-icon__color-inner: @color-blue3;
 
-    @message-notice__color: @color-blue3;
-    @message-notice__background: @color-sky-blue1;
-    @message-notice-icon__color-inner: @color-blue3;
+@message-notice__color: @color-blue3;
+@message-notice__background: @color-sky-blue1;
+@message-notice-icon__color-inner: @color-blue3;
 
-    @message-warning__background: @color-red-light1;
-    @message-warning__color: @message-error__color ;
-    @message-warning-link__color: @message-error__color;
-    @message-warning-icon__color-inner: @message-error-icon__color-inner;
+@message-warning__background: @color-red-light1;
+@message-warning__color: @message-error__color ;
+@message-warning-link__color: @message-error__color;
+@message-warning-icon__color-inner: @message-error-icon__color-inner;
 
-    @message-error__background: @color-red-light1;
-    @message-error-link__color: @message-error__color;
+@message-error__background: @color-red-light1;
+@message-error-link__color: @message-error__color;
 
-    .lib-message(error) {
-        font-weight: 700;
-    }
+.lib-message(error) {
+    font-weight: 700;
+}
 
-    .message.warning a, .message.error a, .message.success a {
-        text-decoration: underline;
-    }
+.message.warning a, .message.error a, .message.success a {
+    text-decoration: underline;
+}
 
-    .message.success a:hover {
-        font-weight: 700;
-    }
+.message.success a:hover {
+    font-weight: 700;
+}
 
-    .message.info a, .message.notice a {
-        font-weight: 700;
-    }
+.message.info a, .message.notice a {
+    font-weight: 700;
 }
