@@ -13,7 +13,9 @@ $viewModel = $block->getData('view_model');
         <?php $product = $viewModel->getProduct((int) $discountRequest->getProductId()); ?>
         <li>
             <?php if ($product): ?>
-                <span><?= $escaper->escapeHtml(__('Requested product:')) ?></span>
+                <span>
+                    <?= $escaper->escapeHtml(__('Requested product:') . ' n/a'/*$discountRequest->getProductName()*/) ?>
+                </span>
                 <a href="<?= $escaper->escapeHtmlAttr($product->getProductUrl()) ?>">
                     <?= $escaper->escapeHtml($product->getName()) ?>
                 </a>

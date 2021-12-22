@@ -10,8 +10,14 @@ class RawResponseDemo implements
     \Magento\Framework\App\Action\HttpGetActionInterface
 {
 
+    /**
+     * @var \Magento\Framework\App\RequestInterface
+     */
     private \Magento\Framework\App\RequestInterface $request;
 
+    /**
+     * @var \Magento\Framework\Controller\Result\RawFactory
+     */
     private \Magento\Framework\Controller\Result\RawFactory $rawFactory;
 
 

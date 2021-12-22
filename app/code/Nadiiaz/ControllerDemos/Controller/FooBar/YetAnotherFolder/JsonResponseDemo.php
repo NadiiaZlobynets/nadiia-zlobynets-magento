@@ -9,8 +9,14 @@ use Magento\Framework\Controller\Result\Json;
 class JsonResponseDemo implements
     \Magento\Framework\App\Action\HttpGetActionInterface
 {
+    /**
+     * @var \Magento\Framework\App\RequestInterface
+     */
     private \Magento\Framework\App\RequestInterface $request;
 
+    /**
+     * @var \Magento\Framework\Controller\Result\JsonFactory
+     */
     private \Magento\Framework\Controller\Result\JsonFactory $jsonFactory;
 
     /**
@@ -27,6 +33,8 @@ class JsonResponseDemo implements
 
     /**
      * Controller demo
+     *
+     * Page URL:
      * /nadiiaz-controller-demos/foobar_yetanotherfolder/jsonresponsedemo/parameter-name-1/10
      *
      * @return Json
