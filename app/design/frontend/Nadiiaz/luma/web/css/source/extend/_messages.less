@@ -1,0 +1,25 @@
+& when (@media-common = true) {
+    .lib-message(error) {
+        font-weight: 700;
+    }
+
+    .message.warning a, .message.error a, .message.success a,
+    .message.notice a, .message.info a {
+        text-decoration: underline;
+    }
+
+    .message.success a:hover {
+        font-weight: 700;
+        color: white;
+    }
+
+    .message.error a:hover, .message.warning a:hover {
+        font-weight: 700;
+        color: darkred;
+    }
+
+    .message.info a:hover, .message.notice a:hover, .message.success a:hover {
+        font-weight: 700;
+        color: white;
+    }
+}

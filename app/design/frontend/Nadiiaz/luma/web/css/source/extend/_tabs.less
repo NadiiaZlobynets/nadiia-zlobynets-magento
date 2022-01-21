@@ -1,0 +1,22 @@
+& when (@media-common = true) {
+        .product.data.items
+    > .item.title:not(.disabled)
+    > .switch:active,
+        .product.data.items
+    > .item.title.active
+    > .switch,
+        .product.data.items
+    > .item.title.active
+    > .switch:focus,
+        .product.data.items
+    > .item.title.active
+    > .switch:hover {
+        color: @color-sky-blue1;
+    }
+
+        .product.data.items
+    > .item.title
+    > .switch {
+        color: @color-blue3;
+    }
+}

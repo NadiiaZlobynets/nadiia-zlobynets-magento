@@ -1,0 +1,33 @@
+& when (@media-common = true) {
+    .navigation .submenu:not(:first-child) ul > li a,
+    .navigation .submenu:not(:first-child) ul > li a:hover,
+    .navigation .submenu:not(:first-child) .active > a:hover,
+    .navigation .submenu:not(:first-child) .active > a
+    .navigation .submenu:not(:first-child) .active > a:hover {
+        color: @color-white;
+        background-color: #799aad;
+    }
+
+    .nav-sections-item-title {
+        background: #8fadbe;
+        color: #ffffff;
+    }
+
+    .navigation .level0 > .level-top {
+        color: #ffffff;
+    }
+
+    .navigation .level0 > .level1 {
+        background-color: #799aad;
+        color: #ffffff;
+    }
+}
+
+.media-width(@extremum, @break)
+when (@extremum = 'min') and
+(@break = @screen__m) {
+    .navigation .submenu:not(:first-child) ul > li a,
+    .navigation .submenu:not(:first-child) ul > li a:hover {
+        color: @color-white;
+    }
+}

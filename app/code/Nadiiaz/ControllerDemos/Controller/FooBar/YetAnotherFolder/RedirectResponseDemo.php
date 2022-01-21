@@ -10,6 +10,9 @@ class RedirectResponseDemo implements
     \Magento\Framework\App\Action\HttpGetActionInterface
 {
 
+    /**
+     * @var \Magento\Framework\Controller\Result\RedirectFactory
+     */
     private \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory;
 
     /**
