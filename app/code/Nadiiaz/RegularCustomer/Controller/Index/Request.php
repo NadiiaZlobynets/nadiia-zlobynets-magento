@@ -59,7 +59,6 @@ class Request implements
      */
     public function __construct(
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-        \Magento\Framework\Message\ManagerInterface $messageManager,
         \Nadiiaz\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory,
         \Nadiiaz\RegularCustomer\Model\ResourceModel\DiscountRequest $discountRequestResource,
         \Magento\Framework\App\RequestInterface $request,
@@ -83,7 +82,6 @@ class Request implements
      */
     public function execute(): Json
     {
-
         /** @var DiscountRequest $discountRequest */
         $discountRequest = $this->discountRequestFactory->create();
 
@@ -91,13 +89,11 @@ class Request implements
             $discountRequest->setProductId((int) $this->request->getParam('product_id'))
                 ->setName($this->request->getParam('name'))
                 ->setEmail($this->request->getParam('email'))
+                ->setMessage($this->request->getParam('message'))
                 ->setStoreId($this->storeManager->getStore()->getId());
 
             $this->discountRequestResource->save($discountRequest);
-            $message = __(
-                'You request for psroducr %1 acepted for rewiew!',
-                $this->request->getParam('productName')
-            );
+            $message = __('You request for product %1 accepted for review!', $this->request->getParam('productName'));
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
             $message = __('Your request can\'t be sent. Please, contact us if you see this message.');
@@ -105,7 +101,7 @@ class Request implements
 
         return $this->jsonFactory->create()
             ->setData([
-                'message => $message'
+                'message' => $message
             ]);
     }
 
