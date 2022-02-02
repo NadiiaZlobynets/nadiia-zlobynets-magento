@@ -6,10 +6,11 @@
  */
 /** @var \Magento\Catalog\Model\Product $product */
 $product = $block->getData('product');
+// Show form in modal window by default
 if ($block->hasData('is_modal')) {
     $isModal = $block->getData('is_modal') ? 'true' : 'false';
 } else {
-    $isModal = 'true';
+    $isModal = 'false';
 }
 ?>
 <div class="nadiiaz-personal-discount-request">
@@ -17,14 +18,13 @@ if ($block->hasData('is_modal')) {
           action="/errors/404.php"
           onsubmit="return false;"
           method="post"
-          data-mage-init='{
-              "Nadiiaz_RegularCustomer_form": {
-                  "action": "<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>",
-                  "isModal": "<?= $escaper->escapeHtmlAttr($isModal) ?>"
-              }
-          }'
+          data-mage-init='{"Nadiiaz_RegularCustomer_form":{
+              "action": "<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>",
+              "isModal": <?= $escaper->escapeHtmlAttr($isModal) ?>
+          }}'
     >
         <fieldset class="fieldset">
+            <?php if ($isModal === 'false'): ?>
             <legend class="legend">
                 <span><?= $escaper->escapeHtml(__('Loyalty program for Regular Customers')) ?></span>
             </legend>
@@ -33,6 +33,7 @@ if ($block->hasData('is_modal')) {
                 <span><?= $escaper->escapeHtml(__('Customers who buy products multiple times get a discount when buying multiple items. Only registered customers will get discounts')) ?></span>
             </div>
             <br/>
+            <?php endif; ?>
             <div class="field name required">
                 <label class="label" for="name">
                     <span><?= $escaper->escapeHtml(__('Name')) ?></span>
