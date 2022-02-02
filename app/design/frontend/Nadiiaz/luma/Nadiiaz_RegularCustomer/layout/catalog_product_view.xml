@@ -14,12 +14,16 @@
                         <argument translate="true" name="title" xsi:type="string">Loyalty program</argument>
                     </arguments>
                 </block>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="nadiiaz.personal.discount.form.open.button"
+                   template="Nadiiaz_RegularCustomer::catalog/product/view/personal_discount_request/form_open_button.phtml"
+            />
         </referenceBlock>
-
         <referenceBlock name="nadiiaz.personal.discount.form">
             <arguments>
                 <argument name="is_modal" xsi:type="boolean">false</argument>
             </arguments>
         </referenceBlock>
+
     </body>
 </page>
