@@ -9,9 +9,15 @@ use Nadiiaz\RegularCustomer\Model\ResourceModel\DiscountRequest\Collection as Di
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 use Magento\Catalog\Model\Product;
 use Magento\Store\Model\Website;
+use Nadiiaz\RegularCustomer\Model\CustomerRequestsProvider as CustomerRequestsProvider;
 
 class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInterface
 {
+    /**
+     * @var \Nadiiaz\RegularCustomer\Model\CustomerRequestsProvider $customerRequestsProvider
+     */
+    private \Nadiiaz\RegularCustomer\Model\CustomerRequestsProvider $customerRequestsProvider;
+
     /**
      * @var DiscountRequestCollectionFactory $discountRequestCollectionFactory
      */
@@ -43,46 +49,32 @@ class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInter
     private \Magento\Catalog\Model\Product\Visibility $productVisibility;
 
     /**
+     * @var \Magento\Customer\Model\Session $customerSession
+     */
+    private \Magento\Customer\Model\Session $customerSession;
+
+    /**
      * @param DiscountRequestCollectionFactory $discountRequestCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Catalog\Model\Product\Visibility $productVisibility
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Nadiiaz\RegularCustomer\Model\CustomerRequestsProvider  $customerRequestsProvider
      */
     public function __construct(
+        CustomerRequestsProvider $customerRequestsProvider,
         DiscountRequestCollectionFactory $discountRequestCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Catalog\Model\Product\Visibility $productVisibility
+        \Magento\Catalog\Model\Product\Visibility $productVisibility,
+        \Magento\Customer\Model\Session $customerSession
     ) {
+        $this->customerRequestsProvider = $customerRequestsProvider;
         $this->discountRequestCollectionFactory = $discountRequestCollectionFactory;
         $this->storeManager = $storeManager;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->productVisibility = $productVisibility;
-    }
-
-    /**
-     * Get a list of customer discount requests
-     *
-     * @return DiscountRequestCollection
-     */
-    public function getDiscountRequestCollection(): DiscountRequestCollection
-    {
-        if (isset($this->loadedDiscountRequestCollection)) {
-            return $this->loadedDiscountRequestCollection;
-        }
-
-        /** @var Website $website */
-        $website = $this->storeManager->getWebsite();
-
-        /** @var DiscountRequestCollection $collection */
-        $collection = $this->discountRequestCollectionFactory->create();
-        // @TODO: get current customer's ID
-        // $collection->addFieldToFilter('customer_id', 2);
-        // @TODO: check if accounts are shared per website or not
-        $collection->addFieldToFilter('store_id', ['in' => $website->getStoreIds()]);
-        $this->loadedDiscountRequestCollection = $collection;
-
-        return $this->loadedDiscountRequestCollection;
+        $this->customerSession = $customerSession;
     }
 
     /**
@@ -94,10 +86,10 @@ class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInter
     public function getProduct(int $productId): ?Product
     {
         if (isset($this->loadedProductCollection)) {
-            return $this->loadedProductCollection->getItemById($productId);
+            $this->customerRequestsProvider->getDiscountRequestCollection()->getItemById($productId);
         }
 
-        $discountRequestCollection = $this->getDiscountRequestCollection();
+        $discountRequestCollection = $this->customerRequestsProvider->getDiscountRequestCollection();
         $productIds = array_unique(array_filter($discountRequestCollection->getColumnValues('product_id')));
 
         $productCollection = $this->productCollectionFactory->create();
