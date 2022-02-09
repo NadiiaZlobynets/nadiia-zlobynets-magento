@@ -48,12 +48,8 @@ class Requests
         $productId = (int) $this->request->getParam('product_id');
 
         $productIds = $this->customerSession->getDiscountRequestProductIds() ?? [];
-        // достали продукты
         $productIds[] = $productId;
-        //добавили текущий товар
         $this->customerSession->setDiscountRequestProductIds(array_unique($productIds));
-        //обратно положили
-        // осталось вернуть джсон респонс с этим массивос
 
         return $this->jsonFactory->create()
             ->setData([
