@@ -5,11 +5,12 @@
     <body>
     <referenceContainer name="content">
         <block class="Magento\Framework\View\Element\Template"
-               name="nadiiaz.personal.discount.page.form."
-               template="Nadiiaz_RegularCustomer::catalog/product/view/discount/personal_discount_request.phtml"
+               name="nadiiaz.personal.discount.form"
+               template="Nadiiaz_RegularCustomer::catalog/product/view/personal_discount_request/form.phtml"
                before="product.info.details"
         >
         </block>
     </referenceContainer>
+
     </body>
 </page>

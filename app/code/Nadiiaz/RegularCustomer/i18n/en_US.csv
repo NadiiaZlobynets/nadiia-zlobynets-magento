@@ -1,4 +1,4 @@
-"You request for product %1 accepted for review!","You request for product %1 accepted for review!"
+"You request for psroducr %1 acepted for rewiew!","You request for psroducr %1 acepted for rewiew!"
 "Your request can't be sent. Please, contact us if you see this message.","Your request can't be sent. Please, contact us if you see this message."
 "Loyalty program for Regular Customers","Loyalty program for Regular Customers"
 "Customers who buy products multiple times get a discount when buying multiple items. Only registered customers will get discounts","Customers who buy products multiple times get a discount when buying multiple items. Only registered customers will get discounts"
@@ -6,6 +6,9 @@ Name,Name
 Email,Email
 "Send Request","Send Request"
 "Requested product:","Requested product:"
+"Posting your request...","Posting your request..."
+Error,Error
+"Your request can't be sent. Please contact us if you see this message","Your request can't be sent. Please contact us if you see this message"
 "Personal Discount","Personal Discount"
 "Loyalty Program","Loyalty Program"
 "My Requests","My Requests"

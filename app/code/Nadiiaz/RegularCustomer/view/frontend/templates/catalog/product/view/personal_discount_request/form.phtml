@@ -5,18 +5,25 @@
  * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
  */
 /** @var \Magento\Catalog\Model\Product $product */
-$product = $block->getData('product')
+$product = $block->getData('product');
+$isModal = 'false';
+
+if ($block->getData('is_modal')) {
+    $isModal = 'true';
+}
 ?>
 <div class="nadiiaz-personal-discount-request">
-    <form class="form"
-          id="nadiiaz-personal-discount-form"
-          action="<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>"
+    <form class="form nadiiaz-personal-discount-form"
+          action="/errors/404.php"
+          onsubmit="return false;"
           method="post"
-          data-mage-init='{
-              "Nadiiaz_RegularCustomer_form": "<?= $escaper->escapeJs(__('Discount Request')) ?>"
-          }'
+          data-mage-init='{"Nadiiaz_RegularCustomer_form":{
+              "action": "<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>",
+              "isModal": <?= $escaper->escapeHtmlAttr($isModal) ?>
+          }}'
     >
         <fieldset class="fieldset">
+            <?php if ($isModal === 'false'): ?>
             <legend class="legend">
                 <span><?= $escaper->escapeHtml(__('Loyalty program for Regular Customers')) ?></span>
             </legend>
@@ -25,6 +32,7 @@ $product = $block->getData('product')
                 <span><?= $escaper->escapeHtml(__('Customers who buy products multiple times get a discount when buying multiple items. Only registered customers will get discounts')) ?></span>
             </div>
             <br/>
+            <?php endif; ?>
             <div class="field name required">
                 <label class="label" for="name">
                     <span><?= $escaper->escapeHtml(__('Name')) ?></span>
@@ -34,6 +42,7 @@ $product = $block->getData('product')
                            title="<?= $escaper->escapeHtmlAttr(__('Name')) ?>"
                            class="input-text"
                            type="text"
+                           data-validate="{required:true}"
                     />
                 </div>
             </div>
@@ -46,17 +55,19 @@ $product = $block->getData('product')
                            title="<?= $escaper->escapeHtmlAttr(__('Email')) ?>"
                            class="input-text"
                            type="email"
+                           data-validate="{required:true, 'validate-email':true}"
                     />
                 </div>
             </div>
         </fieldset>
         <?php if ($product): ?>
         <div class="actions-toolbar">
+            <input type="hidden"
+                   name="product_id"
+                   value="<?= $escaper->escapeHtmlAttr((int) $product->getId()) ?>"
+            />
+        <?php endif; ?>
             <div class="primary">
-                <input type="hidden"
-                       name="product_id"
-                       value="<?= $escaper->escapeHtmlAttr((int) $product->getId()) ?>"
-                />
                 <button type="submit"
                         title="<?= $escaper->escapeHtmlAttr(__('Send Request')) ?>"
                         class="action submit primary"
@@ -65,6 +76,5 @@ $product = $block->getData('product')
                 </button>
             </div>
         </div>
-        <?php endif; ?>
     </form>
 </div>
