@@ -1,0 +1,10 @@
+<?php
+/** @var \TrainingController\OrderController\ViewModel\TestViewModel $viewModel
+// * @var \TrainingController\OrderController\Block\TestBlock $block
+ */
+$viewModel = $block->getViewModel();
+ ?>
+<h1><?= $block->escapeHtml($viewModel->getTitle()) ?></h1>
+<h2><?= $block->escapeHtml($block->getSomeInformation()) ?></h2>
+<h3><?= $block->escapeHtml($block->getData('some_string')) ?></h3>
+<h4><?= $block->escapeHtml($block->getSomeString()) ?></h4>

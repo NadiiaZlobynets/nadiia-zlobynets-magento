@@ -6,11 +6,10 @@
  */
 /** @var \Magento\Catalog\Model\Product $product */
 $product = $block->getData('product');
-// Show form in modal window by default
-if ($block->hasData('is_modal')) {
-    $isModal = $block->getData('is_modal') ? 'true' : 'false';
-} else {
-    $isModal = 'false';
+$isModal = 'false';
+
+if ($block->getData('is_modal')) {
+    $isModal = 'true';
 }
 ?>
 <div class="nadiiaz-personal-discount-request">
@@ -64,11 +63,12 @@ if ($block->hasData('is_modal')) {
         </fieldset>
         <?php if ($product): ?>
         <div class="actions-toolbar">
+            <input type="hidden"
+                   name="product_id"
+                   value="<?= $escaper->escapeHtmlAttr((int) $product->getId()) ?>"
+            />
+        <?php endif; ?>
             <div class="primary">
-                <input type="hidden"
-                       name="product_id"
-                       value="<?= $escaper->escapeHtmlAttr((int) $product->getId()) ?>"
-                />
                 <button type="submit"
                         title="<?= $escaper->escapeHtmlAttr(__('Send Request')) ?>"
                         class="action submit primary"
@@ -77,6 +77,5 @@ if ($block->hasData('is_modal')) {
                 </button>
             </div>
         </div>
-        <?php endif; ?>
     </form>
 </div>
