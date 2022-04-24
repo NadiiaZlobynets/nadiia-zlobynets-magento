@@ -3,10 +3,26 @@ define([
     'Magento_Ui/js/modal/alert',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
-    'mage/cookies'
-], function ($, alert) {
+    'mage/cookies',
+    'uiComponent',
+    'ko'
+], function ($, alert, Component, ko) {
     'use strict';
 
+    return Component.extend({
+        defaults: {
+            template: 'Nadiiaz_RegularCustomer/form'
+        },
+        initialize: function() {
+            this._super();
+        },
+
+        sendRequest: function () {
+            console.log('Going to submit the form');
+        }
+    });
+
+    //----
     $.widget('Nadiiaz.personalDiscount_form', {
         options: {
             action: '',
