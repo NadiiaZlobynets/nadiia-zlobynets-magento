@@ -3,7 +3,11 @@
           action="/errors/404.php"
           onsubmit="return false;"
           method="post"
-          data-bind="submit: sendRequest"
+          data-bind="
+          afterRender: initModal,
+          submit: sendRequest,
+          visible: !formSubmitDeniedMessage()
+      "
     >
     <fieldset class="fieldset">
         <?php if ($isModal === 'false'): ?>
@@ -12,7 +16,7 @@
         </legend>
         <br/>
         <div>
-            <span><?= $escaper->escapeHtml(__('Customers who buy products multiple times get a discount when buying multiple items. Only registered customers will get discounts')) ?></span>
+            <span translate="'Customers who buy products multiple times get a discount when buying multiple items. Only registered customers will get discounts'"></span>
         </div>
         <br/>
         <?php endif; ?>

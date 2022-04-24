@@ -7,7 +7,10 @@
        "Magento_Ui/js/core/app": {
           "components": {
                "personalDiscountRequestForm": {
-                   "component": "Nadiiaz_RegularCustomer_form"
+                   "component": "Nadiiaz_RegularCustomer_form",
+                        "action": "<?= $escaper->escapeJs($block->getUrl('nadiiaz_personal_discount/index/request')) ?>",
+                        "productId": <?= (int) $block->getProduct()->getId() ?>,
+                        "isModal": <?= $escaper->escapeJs($isModal) ?>
                }
            }
        }

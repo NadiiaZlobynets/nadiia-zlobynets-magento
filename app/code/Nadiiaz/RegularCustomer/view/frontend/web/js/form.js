@@ -1,64 +1,106 @@
 define([
     'jquery',
+    'ko',
+    'uiComponent',
     'Magento_Customer/js/customer-data',
-    'Magento_Ui/js/modal/alert',
+    'Nadiiaz_PersonalDiscount_submitFormAction',
+    'Nadiiaz_PersonalDiscount_formSubmitRestrictions',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
-], function ($, alert, Component, ko) {
+    'mage/cookies'
+], function ($, ko, Component, customerData, submitFormAction, formSubmitRestrictions) {
     'use strict';
 
     return Component.extend({
         defaults: {
-            customerName: '',
-            customerEmail: '',
-            customerMessage: '',
-            template: 'Nadiiaz_RegularCustomer/form'
-        },
-        initialize: function() {
-            this._super();
-        },
-
-        sendRequest: function () {
-            console.log('Going to submit the form');
-        }
-    });
-
-    //----
-    $.widget('Nadiiaz.personalDiscount_form', {
-        options: {
             action: '',
-            isModal: true
+            isModal: true,
+            productId: 0,
+            template: 'Nadiiaz_RegularCustomer/form',
+            listens: {
+                formSubmitDeniedMessage: 'updateFormSubmitRestrictions'
+            }
         },
+        customerName: '',
+        customerEmail: '',
+        customerMessage: '',
+        isLoggedIn: !!customerData.get('personal-discount')().isLoggedIn,
+        productIds: [],
 
         /**
-         * @private
+         * Constructor
          */
-        _create: function () {
-            $(this.element).on('submit.nadiiaz_personal_discount_form', this.sendRequest.bind(this));
-
-            if (this.options.isModal) {
-                $(this.element).modal({
-                    buttons: []
-                });
-
-                $(document).on('nadiiaz_personal_discount_form_open', this.openModal.bind(this));
-            }
+        initialize: function () {
+            this._super()
 
             this.updateFormState(customerData.get('personal-discount')());
             customerData.get('personal-discount').subscribe(this.updateFormState.bind(this));
         },
 
         /**
+         * Initialize observables and subscribe to their change if needed
+         * @returns {*}
+         */
+        initObservable: function () {
+            this._super();
+            // Watch name, email and message: customer may change them, or they come from the server
+            // Watch isLoggedIn and productIds because they come from the server
+            this.observe(['customerName', 'customerEmail', 'isLoggedIn', 'productIds']);
+
+            this.formSubmitDeniedMessage = ko.computed(
+                function () {
+                    if (this.productIds().indexOf(this.productId) !== -1) {
+                        return $.mage.__('Discount request for this product has already been sent');
+                    }
+
+                    return '';
+                }.bind(this)
+            );
+
+
+            return this;
+        },
+
+        /**
+         * Update storage to indicate that new restrictions are in action
+         */
+        updateFormSubmitRestrictions: function () {
+            formSubmitRestrictions.formSubmitDeniedMessage(this.formSubmitDeniedMessage());
+        },
+
+        /**
          * Pre-fill form fields with data, hide fields if needed.
+         * @param {Object} personalInfo
          */
         updateFormState: function (personalInfo) {
+            if (personalInfo.hasOwnProperty('name')) {
+                this.customerName(personalInfo.name);
+            }
 
-            if (!!personalInfo.isLoggedIn) {
-                $('.nadiiaz-form-input').hide();
-            } else {
-                $('input[type=text][name=name]').val(personalInfo.name);
-                $('input[type=email][name=email]').val(personalInfo.email);
-                console.log(personalInfo.email)
+            if (personalInfo.hasOwnProperty('email')) {
+                this.customerEmail(personalInfo.email);
+            }
+
+            if (personalInfo.hasOwnProperty('productIds')) {
+                this.productIds(personalInfo.productIds);
+            }
+
+            this.isLoggedIn(!!personalInfo.isLoggedIn);
+        },
+
+        /**
+         * Save current for element and initialize modal window
+         * @param {Node} element
+         */
+        initModal: function (element) {
+            this.$form = $(element);
+
+            if (this.isModal) {
+                this.$modal = this.$form.modal({
+                    buttons: []
+                });
+
+                $(document).on('nadiiaz_personal_discount_form_open', this.openModal.bind(this));
             }
         },
 
@@ -66,7 +108,7 @@ define([
          * Open modal dialog
          */
         openModal: function () {
-            $(this.element).modal('openModal');
+            this.$modal.modal('openModal');
         },
 
         /**
@@ -84,64 +126,28 @@ define([
          * Validate request form
          */
         validateForm: function () {
-            return $(this.element).validation().valid();
+            return this.$form.validation().valid();
         },
 
         /**
          * Submit request via AJAX. Add form key to the post data.
          */
         ajaxSubmit: function () {
-            let formData = new FormData($(this.element).get(0));
+            let payload = {
+                name: this.customerName(),
+                email: this.customerEmail(),
+                message: this.customerMessage(),
+                'product_id': this.productId,
+                'form_key': $.mage.cookies.get('form_key'),
+                isAjax: 1,
+            };
 
-            // Form key is not appended when the form is in the tab. Must add it manually
-            formData.append('form_key', $.mage.cookies.get('form_key'));
-            formData.append('isAjax', 1);
-
-            $.ajax({
-                url: this.options.action,
-                data: formData,
-                processData: false,
-                contentType: false,
-                type: 'post',
-                dataType: 'json',
-                context: this,
-
-                /** @inheritdoc */
-                beforeSend: function () {
-                    $('body').trigger('processStart');
-                },
-
-                /**
-                 * Success means that response from the server was received, but not that the request was saved!
-                 *
-                 * @inheritdoc
-                 */
-                success: function (response) {
-                    alert({
-                        title: $.mage.__('Posting your request...'),
-                        content: response.message
-                    });
-                },
-
-                /** @inheritdoc */
-                error: function () {
-                    alert({
-                        title: $.mage.__('Error'),
-                        content: $.mage.__('Your request can\'t be sent. Please, contact us if you see this message.')
-                    });
-                },
-
-                /** @inheritdoc */
-                complete: function () {
-                    if (this.options.isModal) {
-                        $(this.element).modal('closeModal');
+            submitFormAction(this.action, payload)
+                .done(() => {
+                    if (this.isModal) {
+                        this.$modal.modal('closeModal')
                     }
-
-                    $('body').trigger('processStop');
-                }
-            });
+                });
         }
     });
-
-    return $.Nadiiaz.personalDiscount_form;
 });
