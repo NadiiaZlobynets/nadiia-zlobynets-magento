@@ -8,7 +8,7 @@
     <fieldset class="fieldset">
         <?php if ($isModal === 'false'): ?>
         <legend class="legend">
-            <span><?= $escaper->escapeHtml(__('Loyalty program for Regular Customers')) ?></span>
+            <span translate="'Loyalty program for Regular Customers'"></span>
         </legend>
         <br/>
         <div>
@@ -18,28 +18,42 @@
         <?php endif; ?>
         <?php // @TODO: Get current customer name and email for logged in customers ?>
         <div class="field name required">
-            <label class="label" for="name">
-                <span><?= $escaper->escapeHtml(__('Name')) ?></span>
+            <label class="label" for="nadiiaz-pesonal-discount-name">
+                <span translate="'Name'"></span>
             </label>
             <div class="control">
-                <input name="name"
-                       title="<?= $escaper->escapeHtmlAttr(__('Name')) ?>"
-                       class="input-text"
-                       type="text"
+                <input class="input-text"
+                       data-bind="
+                        value: customerName,
+                        attr: {
+                            title: $t('Name'),
+                            placeholder: $t('Name')
+                            }
+                        "
                        data-validate="{required:true}"
+                       id="nadiiaz-pesonal-discount-name"
+                       name="name"
+                       type="text"
                 />
             </div>
         </div>
         <div class="field email required">
-            <label class="label" for="email">
-                <span><?= $escaper->escapeHtml(__('Email')) ?></span>
+            <label class="label" for="nadiiaz-pesonal-discount-email">
+                <span translate="'Email'"></span>
             </label>
             <div class="control">
-                <input name="email"
-                       title="<?= $escaper->escapeHtmlAttr(__('Email')) ?>"
-                       class="input-text"
+                <input class="input-text"
+                       data-bind="
+                            value: customerEmail,
+                            attr: {
+                                title: $t('Email'),
+                                placeholder: $t('Email'),
+                            }
+                       "
+                       data-validate="{ required: true, 'validate-email': true }"
+                       id="nadiiaz-personal-discount-email"
+                       name="email"
                        type="email"
-                       data-validate="{required:true, 'validate-email':true}"
                 />
             </div>
         </div>
@@ -53,10 +67,14 @@
         <?php endif; ?>
         <div class="primary">
             <button type="submit"
-                    title="<?= $escaper->escapeHtmlAttr(__('Send Request')) ?>"
+                    data-bind="
+                        attr: {
+                            title: $t('Request a Discount')
+                        }
+                    "
                     class="action submit primary"
             >
-                <span><?= $escaper->escapeHtml(__('Send Request')) ?></span>
+                <span translate="'Send Request'"></span>
             </button>
         </div>
     </div>

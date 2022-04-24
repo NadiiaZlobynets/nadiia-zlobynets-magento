@@ -9,6 +9,9 @@ define([
 
     return Component.extend({
         defaults: {
+            customerName: '',
+            customerEmail: '',
+            customerMessage: '',
             template: 'Nadiiaz_RegularCustomer/form'
         },
         initialize: function() {
