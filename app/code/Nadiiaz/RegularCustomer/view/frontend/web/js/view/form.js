@@ -31,7 +31,7 @@ define([
          * Constructor
          */
         initialize: function () {
-            this._super()
+            this._super();
 
             this.updateFormState(customerData.get('personal-discount')());
             customerData.get('personal-discount').subscribe(this.updateFormState.bind(this));
@@ -47,25 +47,24 @@ define([
             // Watch isLoggedIn and productIds because they come from the server
             this.observe(['customerName', 'customerEmail', 'isLoggedIn', 'productIds']);
 
-            this.formSubmitDeniedMessage = ko.computed(
-                function () {
-                    if (this.productIds().indexOf(this.productId) !== -1) {
-                        return $.mage.__('Discount request for this product has already been sent');
-                    }
+            // "updateFormState()" will be called later, so no need to set initial value for "requestAlreadySent()"
+            this.productIds.subscribe((newValue) => {
+                formSubmitRestrictions.requestAlreadySent(newValue.includes(this.productId));
+            });
 
-                    return '';
-                }.bind(this)
-            );
+            this.formSubmitDeniedMessage = ko.computed(() => {
+                if (formSubmitRestrictions.requestAlreadySent()) {
+                    return $.mage.__('Discount request for this product has already been sent');
+                }
 
+                if (formSubmitRestrictions.customerMustLogIn()) {
+                    return $.mage.__('Please, log in to send a request');
+                }
+
+                return '';
+            });
 
             return this;
-        },
-
-        /**
-         * Update storage to indicate that new restrictions are in action
-         */
-        updateFormSubmitRestrictions: function () {
-            formSubmitRestrictions.formSubmitDeniedMessage(this.formSubmitDeniedMessage());
         },
 
         /**
@@ -139,13 +138,13 @@ define([
                 message: this.customerMessage(),
                 'product_id': this.productId,
                 'form_key': $.mage.cookies.get('form_key'),
-                isAjax: 1,
+                isAjax: 1
             };
 
             submitFormAction(this.action, payload)
                 .always(() => {
                     if (this.isModal) {
-                        this.$modal.modal('closeModal')
+                        this.$modal.modal('closeModal');
                     }
                 });
         }
