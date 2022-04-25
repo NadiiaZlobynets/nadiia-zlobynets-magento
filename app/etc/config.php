@@ -337,6 +337,7 @@ return [
         'Klarna_Onsitemessaging' => 1,
         'Klarna_KpGraphQl' => 1,
         'Mageplaza_Core' => 1,
+        'MyCompany_ExampleAdminNewPage' => 1,
         'Nadiiaz_Catalog' => 1,
         'Nadiiaz_Cms' => 1,
         'Nadiiaz_ControllerDemos' => 1,
