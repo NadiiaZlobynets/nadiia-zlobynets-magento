@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Nadiiaz_RegularCustomer::menu" title="Custom Menu" module="Nadiiaz_RegularCustomer" sortOrder="10" resource="Nadiiaz_RegularCustomer::menu"/>
+        <add id="Nadiiaz_RegularCustomer::create" title="Create" module="Nadiiaz_RegularCustomer" sortOrder="10" parent="Nadiiaz_RegularCustomer::menu" action="custommenu/create/index" resource="Nadiiaz_RegularCustomer::create"/>
+        <add id="Nadiiaz_RegularCustomer::delete" title="Delete" module="Nadiiaz_RegularCustomer" sortOrder="20" parent="Nadiiaz_RegularCustomer::menu" action="custommenu/delete/index" resource="Nadiiaz_RegularCustomer::delete"/>
+        <add id="Nadiiaz_RegularCustomer::view" title="View" module="Nadiiaz_RegularCustomer" sortOrder="30" parent="Nadiiaz_RegularCustomer::menu" action="custommenu/view/index" resource="Nadiiaz_RegularCustomer::view"/>
+    </menu>
+</config>
