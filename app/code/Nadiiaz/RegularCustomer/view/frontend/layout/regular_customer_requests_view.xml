@@ -12,6 +12,7 @@
                name="nadiiaz.personal.discount.request.list"
                template="Nadiiaz_RegularCustomer::customer/account/request_list.phtml"
                cacheable="false"
+               ifconfig="nadiiaz_personal_discount/general/enabled"
         >
             <arguments>
                 <argument name="view_model" xsi:type="object">Nadiiaz\RegularCustomer\ViewModel\Customer\RequestList</argument>

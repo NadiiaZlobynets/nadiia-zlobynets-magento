@@ -8,6 +8,7 @@
                name="nadiiaz.personal.discount.form"
                template="Nadiiaz_RegularCustomer::catalog/product/view/personal_discount_request/form.phtml"
                before="product.info.details"
+               ifconfig="nadiiaz_personal_discount/general/enabled"
         >
         </block>
     </referenceContainer>

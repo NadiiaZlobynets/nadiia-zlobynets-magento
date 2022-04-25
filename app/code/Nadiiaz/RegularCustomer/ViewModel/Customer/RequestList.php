@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Nadiiaz\RegularCustomer\ViewModel\Customer;
 
-use Nadiiaz\RegularCustomer\Model\ResourceModel\DiscountRequest\CollectionFactory as DiscountRequestCollectionFactory;
+use Nadiiaz\RegularCustomer\Model\DiscountRequest;
 use Nadiiaz\RegularCustomer\Model\ResourceModel\DiscountRequest\Collection as DiscountRequestCollection;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 use Magento\Catalog\Model\Product;
-use Magento\Store\Model\Website;
-use Nadiiaz\RegularCustomer\Model\CustomerRequestsProvider as CustomerRequestsProvider;
 
 class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInterface
 {
@@ -19,29 +17,9 @@ class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInter
     private \Nadiiaz\RegularCustomer\Model\CustomerRequestsProvider $customerRequestsProvider;
 
     /**
-     * @var DiscountRequestCollectionFactory $discountRequestCollectionFactory
-     */
-    private DiscountRequestCollectionFactory $discountRequestCollectionFactory;
-
-    /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      */
     private \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory;
-
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface $storeManager
-     */
-    private \Magento\Store\Model\StoreManagerInterface $storeManager;
-
-    /**
-     * @var DiscountRequestCollection $loadedDiscountRequestCollection
-     */
-    private DiscountRequestCollection $loadedDiscountRequestCollection;
-
-    /**
-     * @var ProductCollection $loadedProductCollection
-     */
-    private ProductCollection $loadedProductCollection;
 
     /**
      * @var \Magento\Catalog\Model\Product\Visibility $productVisibility
@@ -49,32 +27,41 @@ class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInter
     private \Magento\Catalog\Model\Product\Visibility $productVisibility;
 
     /**
-     * @var \Magento\Customer\Model\Session $customerSession
+     * @var ProductCollection $loadedProductCollection
      */
-    private \Magento\Customer\Model\Session $customerSession;
+    private ProductCollection $loadedProductCollection;
 
     /**
-     * @param DiscountRequestCollectionFactory $discountRequestCollectionFactory
+     * @var \Nadiiaz\RegularCustomer\Ui\Component\DiscountRequest\Source\Status $statusOptions
+     */
+    private \Nadiiaz\RegularCustomer\Ui\Component\DiscountRequest\Source\Status $statusOptions;
+
+    /**
+     * @param \Nadiiaz\RegularCustomer\Model\CustomerRequestsProvider $customerRequestsProvider
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Catalog\Model\Product\Visibility $productVisibility
-     * @param \Magento\Customer\Model\Session $customerSession
-     * @param \Nadiiaz\RegularCustomer\Model\CustomerRequestsProvider  $customerRequestsProvider
+     * @param Product\Visibility $productVisibility
+     * @param \Nadiiaz\RegularCustomer\Ui\Component\DiscountRequest\Source\Status $statusOptions
      */
     public function __construct(
-        CustomerRequestsProvider $customerRequestsProvider,
-        DiscountRequestCollectionFactory $discountRequestCollectionFactory,
+        \Nadiiaz\RegularCustomer\Model\CustomerRequestsProvider $customerRequestsProvider,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Catalog\Model\Product\Visibility $productVisibility,
-        \Magento\Customer\Model\Session $customerSession
+        \Nadiiaz\RegularCustomer\Ui\Component\DiscountRequest\Source\Status $statusOptions
     ) {
         $this->customerRequestsProvider = $customerRequestsProvider;
-        $this->discountRequestCollectionFactory = $discountRequestCollectionFactory;
-        $this->storeManager = $storeManager;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->productVisibility = $productVisibility;
-        $this->customerSession = $customerSession;
+        $this->statusOptions = $statusOptions;
+    }
+
+    /**
+     * Get a list of customer discount requests
+     *
+     * @return DiscountRequestCollection
+     */
+    public function getDiscountRequestCollection(): DiscountRequestCollection
+    {
+        return $this->customerRequestsProvider->getCurrentCustomerRequestCollection();
     }
 
     /**
@@ -86,10 +73,10 @@ class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInter
     public function getProduct(int $productId): ?Product
     {
         if (isset($this->loadedProductCollection)) {
-            $this->customerRequestsProvider->getDiscountRequestCollection()->getItemById($productId);
+            return $this->loadedProductCollection->getItemById($productId);
         }
 
-        $discountRequestCollection = $this->customerRequestsProvider->getDiscountRequestCollection();
+        $discountRequestCollection = $this->getDiscountRequestCollection();
         $productIds = array_unique(array_filter($discountRequestCollection->getColumnValues('product_id')));
 
         $productCollection = $this->productCollectionFactory->create();
@@ -101,5 +88,16 @@ class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInter
         $this->loadedProductCollection = $productCollection;
 
         return $this->loadedProductCollection->getItemById($productId);
+    }
+
+    /**
+     * Get discount request label
+     *
+     * @param DiscountRequest $discountRequest
+     * @return string
+     */
+    public function getStatusLabel(DiscountRequest $discountRequest): string
+    {
+        return (string) $this->statusOptions->asArray()[$discountRequest->getStatus()];
     }
 }

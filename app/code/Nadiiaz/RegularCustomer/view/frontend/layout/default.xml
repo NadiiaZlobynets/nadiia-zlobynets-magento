@@ -4,7 +4,7 @@
 >
     <body>
         <referenceBlock name="footer_links">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="request-footer-link">
+            <block ifconfig="nadiiaz_personal_discount/general/enabled" class="Magento\Framework\View\Element\Html\Link\Current" name="request-footer-link">
                 <arguments>
                     <argument name="label" xsi:type="string" translate="true">Loyalty Program</argument>
                     <argument name="path" xsi:type="string">regular_customer/request/form</argument>
@@ -12,7 +12,7 @@
             </block>
         </referenceBlock>
         <referenceBlock name="top.links">
-            <block class="Nadiiaz\RegularCustomer\Block\Account\Requests" name="request-link" before="authorization-link">
+            <block ifconfig="nadiiaz_personal_discount/general/enabled" class="Nadiiaz\RegularCustomer\Block\Account\Requests" name="request-link" before="authorization-link">
                 <arguments>
                     <argument name="path" xsi:type="string">regular_customer/requests/view</argument>
                     <argument name="label" xsi:type="string" translate="true">My Requests</argument>

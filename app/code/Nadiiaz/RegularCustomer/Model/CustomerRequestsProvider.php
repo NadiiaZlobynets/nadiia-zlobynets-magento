@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nadiiaz\RegularCustomer\Model;
 
-use Magento\Store\Model\Website;
 use Nadiiaz\RegularCustomer\Model\ResourceModel\DiscountRequest\CollectionFactory as DiscountRequestCollectionFactory;
 use Nadiiaz\RegularCustomer\Model\ResourceModel\DiscountRequest\Collection as DiscountRequestCollection;
+use Magento\Store\Model\Website;
 
 class CustomerRequestsProvider
 {
@@ -14,33 +16,53 @@ class CustomerRequestsProvider
     private DiscountRequestCollectionFactory $discountRequestCollectionFactory;
 
     /**
-     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
+     * @var \Magento\Customer\Model\Session $customerSession
      */
-    private \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory;
+    private \Magento\Customer\Model\Session $customerSession;
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface $storeManager
+     */
+    private \Magento\Store\Model\StoreManagerInterface $storeManager;
+
+    /**
+     * @var DiscountRequestCollection $discountRequestCollection
+     */
+    private DiscountRequestCollection $discountRequestCollection;
+
+    /**
+     * @var \Magento\Customer\Model\Config\Share $shareConfig
+     */
+    private \Magento\Customer\Model\Config\Share $shareConfig;
 
     /**
      * @param DiscountRequestCollectionFactory $discountRequestCollectionFactory
-     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Customer\Model\Config\Share $shareConfig
      */
-
     public function __construct(
-        DiscountRequestCollectionFactory                               $discountRequestCollectionFactory,
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
-    )
-    {
+        DiscountRequestCollectionFactory $discountRequestCollectionFactory,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Customer\Model\Config\Share $shareConfig
+    ) {
         $this->discountRequestCollectionFactory = $discountRequestCollectionFactory;
+        $this->customerSession = $customerSession;
+        $this->storeManager = $storeManager;
+        $this->shareConfig = $shareConfig;
     }
 
     /**
-     * Get a list of customer discount requests
+     * Cache and return a collection of discount requests for the current customer
      *
      * @return DiscountRequestCollection
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-
-    public function getDiscountRequestCollection(): DiscountRequestCollection
+    public function getCurrentCustomerRequestCollection(): DiscountRequestCollection
     {
-        if (isset($this->loadedDiscountRequestCollection)) {
-            return $this->loadedDiscountRequestCollection;
+        if (isset($this->discountRequestCollection)) {
+            return $this->discountRequestCollection;
         }
 
         /** @var Website $website */
@@ -49,11 +71,16 @@ class CustomerRequestsProvider
         /** @var DiscountRequestCollection $collection */
         $collection = $this->discountRequestCollectionFactory->create();
         $collection->addFieldToFilter('customer_id', $this->customerSession->getCustomerId());
-        // @TODO: check if accounts are shared per website or not
-        $collection->addFieldToFilter('store_id', ['in' => $website->getStoreIds()]);
-        $this->loadedDiscountRequestCollection = $collection;
 
-        return $this->loadedDiscountRequestCollection;
+        // We need to decide whether we want to show requests from other websites or not
+        // Maybe we can add config for this and show website name/url in case the request is from another website
+        // A simple way to handle this is always adding the filter
+        if ($this->shareConfig->isWebsiteScope()) {
+            $collection->addFieldToFilter('store_id', ['in' => $website->getStoreIds()]);
+        }
 
+        $this->discountRequestCollection = $collection;
+
+        return $this->discountRequestCollection;
     }
 }
