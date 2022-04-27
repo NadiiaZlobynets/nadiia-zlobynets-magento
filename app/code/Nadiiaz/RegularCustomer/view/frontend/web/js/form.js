@@ -17,9 +17,9 @@ define([
          * @private
          */
         _create: function () {
-            if ($(this.element).find("input[name='product_id']") === ($.formData.getAll('productIds')).indexOf() < 0) {
-                $(this.element).hide();
-            }
+            // if ($(this.element).find("input[name='product_id']") === ($.formData.getAll('productIds')).indexOf() < 0) {
+            //     $(this.element).hide();
+            // }
             $(this.element).on('submit.nadiiaz_personal_discount_form', this.sendRequest.bind(this));
 
             if (this.options.isModal) {
@@ -29,27 +29,21 @@ define([
                 $(document).on('nadiiaz_personal_discount_form_open', this.openModal.bind(this));
             }
 
-            //if ($(this.element).find("input[name='product_id']") === ($.formData.getAll('productIds')).indexOf() < 0) {
-                // $(this.element).hide();
-
-            //}
-            checkIfProductWasRequested();
+            // checkIfProductWasRequested();
         },
 
         /**
          * Check if product was requested
          */
-        checkIfProductWasRequested: function () {
-            let productId = $("input[name=product_id]").val();
-
-            productId  = 0;
-
-
-
-            if (response.productIds.includes(this.productId)) {
-                $(this.element).hide();
-            }
-        },
+        // checkIfProductWasRequested: function () {
+        //     let productId = $("input[name=product_id]").val();
+        //
+        //     productId  = 0;
+        //
+        //     if (response.productIds.includes(this.productId)) {
+        //         $(this.element).hide();
+        //     }
+        // },
 
         /**
          * Open modal dialog
@@ -110,12 +104,6 @@ define([
                         title: $.mage.__('Posting your request...'),
                         content: response.message
                     });
-
-                    alert({
-                        title: $.mage.__('Already requested!'),
-                        content: $.mage.__('Your request can\'t be sent. The product is already requested!')
-                    });
-
                 },
 
                 /** @inheritdoc */
