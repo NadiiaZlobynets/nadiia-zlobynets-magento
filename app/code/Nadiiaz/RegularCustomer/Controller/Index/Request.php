@@ -121,11 +121,12 @@ class Request implements
             $productCollection->addIdFilter($productId)
                 ->setPageSize(1);
             $product = $productCollection->getFirstItem();
-            $productId = (int) $product->getId();
 
-            if (!$productId) {
+            if ($productId && !$product->getId()) {
                 throw new \InvalidArgumentException("Product with id $productId does not exist");
             }
+
+            $productId = (int) $product->getId();
 
             $discountRequest->setProductId($productId)
                 ->setCustomerId($customerId)

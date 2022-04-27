@@ -28,6 +28,27 @@ define([
                 });
                 $(document).on('nadiiaz_personal_discount_form_open', this.openModal.bind(this));
             }
+
+            //if ($(this.element).find("input[name='product_id']") === ($.formData.getAll('productIds')).indexOf() < 0) {
+                // $(this.element).hide();
+
+            //}
+            checkIfProductWasRequested();
+        },
+
+        /**
+         * Check if product was requested
+         */
+        checkIfProductWasRequested: function () {
+            let productId = $("input[name=product_id]").val();
+
+            productId  = 0;
+
+
+
+            if (response.productIds.includes(this.productId)) {
+                $(this.element).hide();
+            }
         },
 
         /**
