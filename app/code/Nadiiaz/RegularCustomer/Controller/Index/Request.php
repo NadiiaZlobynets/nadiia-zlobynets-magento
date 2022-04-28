@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nadiiaz\RegularCustomer\Controller\Index;
 
 use Nadiiaz\RegularCustomer\Model\DiscountRequest;
+use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\Json;
@@ -44,6 +45,16 @@ class Request implements
     private \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator;
 
     /**
+     * @var \Magento\Customer\Model\Session $customerSession
+     */
+    private \Magento\Customer\Model\Session $customerSession;
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
+     */
+    private \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory;
+
+    /**
      * @var \Psr\Log\LoggerInterface $logger
      */
     private \Psr\Log\LoggerInterface $logger;
@@ -55,6 +66,8 @@ class Request implements
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
@@ -64,6 +77,8 @@ class Request implements
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Psr\Log\LoggerInterface $logger
     ) {
         $this->jsonFactory = $jsonFactory;
@@ -73,6 +88,8 @@ class Request implements
         $this->storeManager = $storeManager;
         $this->formKeyValidator = $formKeyValidator;
         $this->logger = $logger;
+        $this->productCollectionFactory = $productCollectionFactory;
+        $this->customerSession = $customerSession;
     }
 
     /**
@@ -86,13 +103,48 @@ class Request implements
         $discountRequest = $this->discountRequestFactory->create();
 
         try {
-            $discountRequest->setProductId((int) $this->request->getParam('product_id'))
-                ->setName($this->request->getParam('name'))
-                ->setEmail($this->request->getParam('email'))
+            $customerId = $this->customerSession->getCustomerId()
+                ? (int) $this->customerSession->getCustomerId()
+                : null;
+
+            if ($this->customerSession->isLoggedIn()) {
+                $name = $this->customerSession->getCustomer()->getName();
+                $email = $this->customerSession->getCustomer()->getEmail();
+            } else {
+                $name = $this->request->getParam('name');
+                $email = $this->request->getParam('email');
+            }
+
+            $productId = (int) $this->request->getParam('product_id');
+            /** @var ProductCollection $productCollection */
+            $productCollection = $this->productCollectionFactory->create();
+            $productCollection->addIdFilter($productId)
+                ->setPageSize(1);
+            $product = $productCollection->getFirstItem();
+
+            if ($productId && !$product->getId()) {
+                throw new \InvalidArgumentException("Product with id $productId does not exist");
+            }
+
+            $productId = (int) $product->getId();
+
+            $discountRequest->setProductId($productId)
+                ->setCustomerId($customerId)
+                ->setName($name)
+                ->setEmail($email)
                 ->setMessage($this->request->getParam('message'))
                 ->setStoreId($this->storeManager->getStore()->getId());
 
             $this->discountRequestResource->save($discountRequest);
+
+            if (!$this->customerSession->isLoggedIn()) {
+                $this->customerSession->setDiscountRequestCustomerName($name);
+                $this->customerSession->setDiscountRequestCustomerEmail($email);
+                $productIds = $this->customerSession->getDiscountRequestProductIds() ?? [];
+                $productIds[] = $productId;
+                $this->customerSession->setDiscountRequestProductIds(array_unique($productIds));
+            }
+
             $message = __('You request for product %1 accepted for review!', $this->request->getParam('productName'));
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
