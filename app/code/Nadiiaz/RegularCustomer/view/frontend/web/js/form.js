@@ -1,16 +1,17 @@
 define([
     'jquery',
+    'Magento_Customer/js/customer-data',
     'Magento_Ui/js/modal/alert',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
-], function ($, alert) {
+], function ($, customerData, alert) {
     'use strict';
 
     $.widget('Nadiiaz.personalDiscount_form', {
         options: {
             action: '',
-            isModal: false
+            isModal: true
         },
 
         /**
@@ -23,8 +24,14 @@ define([
                 $(this.element).modal({
                     buttons: []
                 });
+
                 $(document).on('nadiiaz_personal_discount_form_open', this.openModal.bind(this));
             }
+
+            console.log(customerData.get('personal-discount')());
+            customerData.get('personal-discount').subscribe(function (value) {
+                console.log(value);
+            });
         },
 
         /**
@@ -108,6 +115,5 @@ define([
         }
     });
 
-    /** Return the module to RequireJS engine */
     return $.Nadiiaz.personalDiscount_form;
 });
