@@ -36,7 +36,13 @@ define([
          * Pre-fill form fields with data, hide fields if needed.
          */
         updateFormState: function (personalInfo) {
-            console.log(personalInfo);
+
+            if (!!personalInfo.isLoggedIn) {
+                $('.nadiiaz-form-input').hide();
+            } else {
+                $('input[type=text][name=name]').val(personalInfo.name);
+                $('input[type=text][name=email]').val(personalInfo.email);
+            }
         },
 
         /**
