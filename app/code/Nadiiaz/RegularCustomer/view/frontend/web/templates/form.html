@@ -1,14 +1,13 @@
-<div class="nadiiaz-personal-discount-request">
-    <form class="form nadiiaz-personal-discount-form"
-          action="/errors/404.php"
-          onsubmit="return false;"
-          method="post"
-          data-bind="
-              afterRender: initModal,
-              submit: sendRequest,
-              visible: !formSubmitDeniedMessage()
+<form class="form nadiiaz-personal-discount-form"
+      action="/errors/404.php"
+      onsubmit="return false;"
+      method="post"
+      data-bind="
+          afterRender: initModal,
+          submit: sendRequest,
+          visible: !formSubmitDeniedMessage()
       "
-    >
+>
     <fieldset class="fieldset">
         <?php if ($isModal === 'false'): ?>
         <legend class="legend">
@@ -28,13 +27,13 @@
             <div class="control">
                 <input class="input-text"
                        data-bind="
-                        value: customerName,
-                        attr: {
-                            title: $t('Name'),
-                            placeholder: $t('Name')
+                            value: customerName,
+                            attr: {
+                                title: $t('Name'),
+                                placeholder: $t('Name'),
                             }
-                        "
-                       data-validate="{required:true}"
+                       "
+                       data-validate="{ required: true }"
                        id="nadiiaz-pesonal-discount-name"
                        name="name"
                        type="text"
@@ -42,7 +41,7 @@
             </div>
         </div>
         <div class="field email required">
-            <label class="label" for="nadiiaz-pesonal-discount-email">
+            <label class="label" for="nadiiaz-personal-discount-email">
                 <span translate="'Email'"></span>
             </label>
             <div class="control">
@@ -83,4 +82,7 @@
         </div>
     </div>
     </form>
+</div>
+<div class="message-info info message" data-bind="visible: formSubmitDeniedMessage()">
+    <div data-bind="text: formSubmitDeniedMessage()"></div>
 </div>

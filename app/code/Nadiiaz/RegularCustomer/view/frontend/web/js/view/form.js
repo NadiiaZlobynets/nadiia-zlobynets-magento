@@ -3,8 +3,8 @@ define([
     'ko',
     'uiComponent',
     'Magento_Customer/js/customer-data',
-    'Nadiiaz_PersonalDiscount_submitFormAction',
-    'Nadiiaz_PersonalDiscount_formSubmitRestrictions',
+    'Nadiiaz_RegularCustomer_submitFormAction',
+    'Nadiiaz_RegularCustomer_formSubmitRestrictions',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
@@ -21,6 +21,7 @@ define([
                 formSubmitDeniedMessage: 'updateFormSubmitRestrictions'
             }
         },
+
         customerName: '',
         customerEmail: '',
         customerMessage: '',

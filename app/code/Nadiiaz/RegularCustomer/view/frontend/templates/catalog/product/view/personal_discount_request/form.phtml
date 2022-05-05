@@ -1,21 +1,35 @@
+<?php
+/**
+ * @var \Nadiiaz\RegularCustomer\Block\Product\View\DiscountRequest $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+/** @var \Magento\Catalog\Model\Product $product */
+$product = $block->getData('product');
+// Show form in modal window by default
+if ($block->hasData('is_modal')) {
+    $isModal = $block->getData('is_modal') ? 'true' : 'false';
+} else {
+    $isModal = 'true';
+}
+?>
 <div class="nadiiaz-personal-discount-request" data-bind="scope:'personalDiscountRequestForm'">
     <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
+
 <script type="text/x-magento-init">
-{
-   "*": {
-       "Magento_Ui/js/core/app": {
-          "components": {
-               "personalDiscountRequestForm": {
-                   "component": "Nadiiaz_RegularCustomer_form",
-                        "action": "<?= $escaper->escapeJs($block->getUrl('nadiiaz_personal_discount/index/request')) ?>",
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "personalDiscountRequestForm": {
+                        "component": "Nadiiaz_RegularCustomer_form",
+                        "action": "<?= $escaper->escapeJs($block->getUrl('regular_customer/index/request')) ?>",
                         "productId": <?= (int) $block->getProduct()->getId() ?>,
                         "isModal": <?= $escaper->escapeJs($isModal) ?>
-               }
-           }
-       }
-   }
-}
+                    }
+                }
+            }
+        }
+    }
 </script>
-
-

@@ -1,16 +1,25 @@
 <?php
 /**
- * @var \Nadiiaz\RegularCustomer\Block\Product\View\DiscountRequest $block
+ * @var \Magento\Framework\View\Element\Template $block
  * @var \Magento\Framework\Escaper $escaper
  * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
  */
-/** @var \Magento\Catalog\Model\Product $product */
-$product = $block->getData('product');
 ?>
-<div>
-    <h4><?= $escaper->escapeHtml(__('Loyalty program for Regular Customers')) ?></h4>
-    <p><?= $escaper->escapeHtml(__('Customers who buy products multiple times get a discount when buying multiple items. Only registered customers will get discounts')) ?></p>
+<?php /** @TODO: only logged in customers must be able to make a request. Show login form on button click */ ?>
+<div data-bind="scope: 'personalDiscountRequestButton'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
-<button class="action primary" data-mage-init='{"Nadiiaz_RegularCustomer_formOpenButton":{}}'">
-    <span><?= $escaper->escapeHtml(__('Request Personal Discount'))?></span>
-</button>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "personalDiscountRequestButton": {
+                        "component": "Nadiiaz_RegularCustimer_formOpenButton"
+                    }
+                }
+            }
+        }
+    }
+</script>
