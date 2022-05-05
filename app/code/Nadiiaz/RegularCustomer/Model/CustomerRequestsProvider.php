@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nadiiaz\RegularCustomer\Model;
 
-use Magento\Store\Model\Website;
 use Nadiiaz\RegularCustomer\Model\ResourceModel\DiscountRequest\CollectionFactory as DiscountRequestCollectionFactory;
 use Nadiiaz\RegularCustomer\Model\ResourceModel\DiscountRequest\Collection as DiscountRequestCollection;
+use Magento\Store\Model\Website;
 
 class CustomerRequestsProvider
 {
@@ -14,33 +16,45 @@ class CustomerRequestsProvider
     private DiscountRequestCollectionFactory $discountRequestCollectionFactory;
 
     /**
-     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
+     * @var \Magento\Customer\Model\Session $customerSession
      */
-    private \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory;
+    private \Magento\Customer\Model\Session $customerSession;
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface $storeManager
+     */
+    private \Magento\Store\Model\StoreManagerInterface $storeManager;
+
+    /**
+     * @var DiscountRequestCollection $discountRequestCollection
+     */
+    private DiscountRequestCollection $discountRequestCollection;
 
     /**
      * @param DiscountRequestCollectionFactory $discountRequestCollectionFactory
-     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
-
     public function __construct(
-        DiscountRequestCollectionFactory                               $discountRequestCollectionFactory,
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
-    )
-    {
+        DiscountRequestCollectionFactory $discountRequestCollectionFactory,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    ) {
         $this->discountRequestCollectionFactory = $discountRequestCollectionFactory;
+        $this->customerSession = $customerSession;
+        $this->storeManager = $storeManager;
     }
 
     /**
-     * Get a list of customer discount requests
+     * Cache and return a collection of discount requests for the current customer
      *
      * @return DiscountRequestCollection
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-
-    public function getDiscountRequestCollection(): DiscountRequestCollection
+    public function getCurrentCustomerRequestCollection(): DiscountRequestCollection
     {
-        if (isset($this->loadedDiscountRequestCollection)) {
-            return $this->loadedDiscountRequestCollection;
+        if (isset($this->discountRequestCollection)) {
+            return $this->discountRequestCollection;
         }
 
         /** @var Website $website */
@@ -51,9 +65,8 @@ class CustomerRequestsProvider
         $collection->addFieldToFilter('customer_id', $this->customerSession->getCustomerId());
         // @TODO: check if accounts are shared per website or not
         $collection->addFieldToFilter('store_id', ['in' => $website->getStoreIds()]);
-        $this->loadedDiscountRequestCollection = $collection;
+        $this->discountRequestCollection = $collection;
 
-        return $this->loadedDiscountRequestCollection;
-
+        return $this->discountRequestCollection;
     }
 }
