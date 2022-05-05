@@ -40,6 +40,7 @@ if ($block->getData('is_modal')) {
                 </label>
                 <div class="control ">
                     <input name="name"
+                           autocomplete="false"
                            title="<?= $escaper->escapeHtmlAttr(__('Name')) ?>"
                            class="input-text"
                            type="text"
@@ -53,6 +54,7 @@ if ($block->getData('is_modal')) {
                 </label>
                 <div class="control">
                     <input name="email"
+                           autocomplete="false"
                            title="<?= $escaper->escapeHtmlAttr(__('Email')) ?>"
                            class="input-text"
                            type="email"

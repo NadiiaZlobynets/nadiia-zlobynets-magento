@@ -41,7 +41,8 @@ define([
                 $('.nadiiaz-form-input').hide();
             } else {
                 $('input[type=text][name=name]').val(personalInfo.name);
-                $('input[type=text][name=email]').val(personalInfo.email);
+                $('input[type=email][name=email]').val(personalInfo.email);
+                console.log(personalInfo.email)
             }
         },
 
