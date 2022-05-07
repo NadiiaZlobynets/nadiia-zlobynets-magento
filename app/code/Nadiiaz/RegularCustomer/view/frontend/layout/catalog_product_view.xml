@@ -15,7 +15,7 @@
                         <argument name="jsLayout" xsi:type="array">
                             <!-- Choose either `updater` or `xsi:type="helper"` -->
                             <!-- "updater" can also be used with any argument, not just a jsLayout -->
-                            <updater>DVCampus\PersonalDiscount\Model\CurrentProductIdUpdater</updater>
+                            <updater>Nadiiaz\RegularCustomer\Model\CurrentProductIdUpdater</updater>
                             <item name="components" xsi:type="array">
                                 <item name="personalDiscountRequest" xsi:type="array">
                                     <item name="component" xsi:type="string">uiCollection</item>
@@ -38,11 +38,6 @@
                                         <item name="personalDiscountRequestButton" xsi:type="array">
                                             <item name="component" xsi:type="string">Nadiiaz_RegularCustomer_formOpenButton</item>
                                             <item name="displayArea" xsi:type="string">nadiiaz-regularCustomer-formOpenButton</item>
-                                            <item name="config" xsi:type="array">
-                                                <item name="imports" xsi:type="array">
-                                                    <item name="isModal" xsi:type="string">personalDiscountRequest.personalDiscountRequestForm:isModal</item>
-                                                </item>
-                                            </item>
                                         </item>
                                     </item>
                                 </item>
