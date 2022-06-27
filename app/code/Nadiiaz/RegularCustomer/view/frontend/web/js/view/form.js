@@ -1,14 +1,37 @@
 define([
     'jquery',
+    'ko',
+    'uiComponent',
     'Magento_Customer/js/customer-data',
     'Magento_Ui/js/modal/alert',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
-], function ($, customerData, alert) {
+], function ($, ko, Component, customerData, alert) {
     'use strict';
 
-    $.widget('Nadiiaz.personalDiscount_form', {
+    return Component.extend({
+        defaults: {
+            customerName: '',
+            customerEmail: '',
+            customerMessage: '',
+            template: 'Nadiiaz_RegularCustomer/form'
+        },
+
+        initObservable: function () {
+            this._super();
+            this.observe(['customerName', 'customerEmail', 'customerMessage']);
+
+            this.customerName.subscribe(function (newValue) {
+                console.log(newValue);
+            });
+
+            return this;
+        }
+    });
+
+    // The below code does not work due to the `return` statement above
+    $.widget('Nadiiaz.regularCustomer_form', {
         options: {
             action: '',
             isModal: true
@@ -18,14 +41,14 @@ define([
          * @private
          */
         _create: function () {
-            $(this.element).on('submit.nadiiaz_personal_discount_form', this.sendRequest.bind(this));
+            $(this.element).on('submit.nadiiaz_regular_customer_discount_form', this.sendRequest.bind(this));
 
             if (this.options.isModal) {
                 $(this.element).modal({
                     buttons: []
                 });
 
-                $(document).on('nadiiaz_personal_discount_form_open', this.openModal.bind(this));
+                $(document).on('nadiiaz_regular_customer_discount_form_open', this.openModal.bind(this));
             }
 
             this.updateFormState(customerData.get('personal-discount')());
@@ -36,13 +59,7 @@ define([
          * Pre-fill form fields with data, hide fields if needed.
          */
         updateFormState: function (personalInfo) {
-
-            if (!!personalInfo.isLoggedIn) {
-                $('.nadiiaz-form-input').hide();
-            } else {
-                $('input[type=text][name=name]').val(personalInfo.name);
-                $('input[type=text][name=email]').val(personalInfo.email);
-            }
+            console.log(personalInfo);
         },
 
         /**
@@ -126,5 +143,5 @@ define([
         }
     });
 
-    return $.Nadiiaz.personalDiscount_form;
+    return $.Nadiiaz.regularCustomer_form;
 });
