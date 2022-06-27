@@ -22,10 +22,7 @@ if ($block->getData('is_modal')) {
             "Magento_Ui/js/core/app": {
                 "components": {
                     "RegularCustomerForm": {
-                        "component": "Nadiiaz_RegularCustomer_form",
-                        "action": "<?= $escaper->escapeJs($block->getUrl('regular_customer/index/request')) ?>",
-                        "productId": <?= (int) $block->getProduct()->getId() ?>,
-                        "isModal": <?= $escaper->escapeJs($isModal) ?>
+                        "component": "Nadiiaz_RegularCustomer_form"
                     }
                 }
             }
