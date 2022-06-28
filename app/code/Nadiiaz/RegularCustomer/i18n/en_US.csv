@@ -6,9 +6,13 @@ Name,Name
 Email,Email
 "Send Request","Send Request"
 "Requested product:","Requested product:"
+"Request a Discount","Request a Discount"
 "Posting your request...","Posting your request..."
 Error,Error
 "Your request can't be sent. Please contact us if you see this message","Your request can't be sent. Please contact us if you see this message"
 "Personal Discount","Personal Discount"
 "Loyalty Program","Loyalty Program"
 "My Requests","My Requests"
+"Request Personal Discount","Request Personal Discount"
+"Message: %1","Message: %1"
+"Discount request for this product has already been sent","Discount request for this product has already been sent"
